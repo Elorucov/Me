@@ -1,0 +1,652 @@
+<!-- Created by Elchin Orujov on 2026. No artifical cringelligence are used. -->
+
+<?php
+
+function e(string $s): string
+{
+    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+}
+
+/** .png fallback for a .webp logo images */
+function pngFallback(string $url): string
+{
+    return preg_replace('/\.webp$/', ".png", $url);
+}
+
+const SUPPORTED_LANGS = ['en', 'ru', 'az'];
+const LANG_COOKIE = "homePageLang";
+const BLOG_URL = "https://elor.top/blog/";
+
+function detectLang(array $supported = SUPPORTED_LANGS, string $default = 'en'): string
+{
+    // 1. Cookie
+    $cookie = strtolower($_COOKIE[LANG_COOKIE] ?? '');
+    if (in_array($cookie, $supported, true)) {
+        return $cookie;
+    }
+
+    // 2. Accept-Language: "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+    $header = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
+    $candidates = [];
+
+    foreach (explode(',', $header) as $i => $part) {
+        $bits = explode(';', trim($part));
+        $tag  = strtolower(trim($bits[0]));
+        $q    = 1.0;
+
+        if (isset($bits[1]) && preg_match('/^\s*q\s*=\s*([\d.]+)/i', $bits[1], $m)) {
+            $q = (float)$m[1];
+        }
+        if ($tag === '' || $tag === '*' || $q <= 0) {
+            continue;
+        }
+
+        $candidates[] = [explode('-', $tag)[0], $q, $i]; // "ru-RU" → "ru"
+    }
+
+    // sort by descending
+    usort($candidates, fn($a, $b) => $b[1] <=> $a[1] ?: $a[2] <=> $b[2]);
+
+    foreach ($candidates as [$code]) {
+        if (in_array($code, $supported, true)) {
+            return $code;
+        }
+    }
+
+    // 3. Ничего не подошло
+    return $default;
+}
+
+header('Vary: Accept-Language, Cookie');
+
+// Set language by "?lang=" parameter.
+if (isset($_GET['lang']) && in_array($_GET['lang'], SUPPORTED_LANGS, true)) {
+    setcookie('lang', $_GET['lang'], [
+        'expires'  => time() + 365 * 24 * 3600,
+        'path'     => '/',
+        'samesite' => 'Lax',
+    ]);
+    $_COOKIE[LANG_COOKIE] = $_GET['lang'];
+}
+
+$lang = detectLang();
+$currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+// Age
+$birthDate = explode("/", "02/05/1998");
+$age =
+    date(
+        "md",
+        date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2])),
+    ) > date("md")
+        ? date("Y") - $birthDate[2] - 1
+        : date("Y") - $birthDate[2];
+
+// ---------------------------------------------------------------------------
+// Projects
+//
+// logo is one of:
+//   ["light" => url, "dark" => url]  - two logos for light/dark themes
+//   ["src" => url]                   - a single logo
+//   ["icon" => "name"]               - icon from icons.svg
+//
+// links: "url" => "link text"
+// techStack: list of HTML strings, optional
+// ---------------------------------------------------------------------------
+
+$logoBase = "res/impressive_landing/logos/";
+
+$projects = [
+    [
+        "name" => "Laney",
+        "color" => "#0070C0",
+        "meta" => ["UWP", ".NET", "App", "2018-2025"],
+        "logo" => [
+            "light" => $logoBase . "laney1_light.webp",
+            "dark" => $logoBase . "laney1_dark.webp",
+        ],
+        "description" => "A messenger for VK social network for Windows. Reached 10 000 users.",
+        "links" => [
+            "https://elor.top/laney" => "Download",
+            "https://github.com/Elorucov/Laney-Legacy" => "Source code",
+        ],
+        "techStack" => [
+            "<b>MVVM</b> pattern (partially);",
+            '<a href="https://learn.microsoft.com/en-us/windows/apps/develop/win2d/" target="_blank">Win2D</a> and Windows Composition API for rendering chat background and some animations;',
+            '<a href="https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/wns-overview" target="_blank">WNS</a> push notifications;',
+            '<a href="https://www.newtonsoft.com/json" target="_blank">Newtonsoft.Json</a> for working with JSON (VK API, themes and emoji list);',
+            '<a href="https://github.com/Shane32/QRCoder" target="_blank">QRCoder</a> for generating QR-code for auth.',
+        ],
+    ],
+    [
+        "name" => "Laney 2",
+        "color" => "#BE75E0",
+        "meta" => ["Desktop", ".NET", "App", "2022"],
+        "logo" => ["src" => $logoBase . "laney2.webp"],
+        "description" => "A cross-platform version of Laney for Windows, macOS and Linux.",
+        "links" => [
+            "https://github.com/Elorucov/Laney-Avalonia" => "Source code",
+        ],
+        "techStack" => [
+            "<b>MVVM</b> pattern;",
+            '<a href="https://avaloniaui.net" target="_blank">Avalonia</a> — a cross-platform UI framework;',
+            '<a href="https://code.videolan.org/videolan/LibVLCSharp" target="_blank">LibVLCSharp</a> for audio;',
+            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging;',
+            '<a href="https://www.newtonsoft.com/json" target="_blank">System.Text.Json</a> — a build-in .NET API for working with JSON (VK API);',
+            '<a href="https://github.com/oleg-st/ZstdSharp" target="_blank">ZstdSharp</a> for receiving response from API more efficient;',
+            '<a href="https://github.com/Elorucov/VKUI.Avalonia" target="_blank">VKUI.Avalonia</a> — a self-written library of UI components to make the app UI similar to the official app.',
+        ],
+    ],
+    [
+        "name" => "WidgetShot",
+        "color" => "#34E45F",
+        "meta" => ["UWP", ".NET", "App", "2025"],
+        "logo" => ["src" => $logoBase . "widgetshot.webp"],
+        "description" => "A tool for checking Windows 11 widgets and taking screenshots of them.",
+        "links" => [
+            "https://apps.microsoft.com/detail/9nr39qhpqr8w" => "Download from Store",
+            "https://github.com/Elorucov/WidgetShot" => "Source code",
+        ],
+    ],
+    [
+        "name" => "PurpleBlog",
+        "color" => "#800080",
+        "meta" => ["Desktop", ".NET", "Tool", "2026"],
+        "logo" => ["src" => $logoBase . "purpleblog.webp"],
+        "description" => "A CLI tool for converting Markdown files to HTML pages with template.",
+        "links" => [
+            "https://github.com/Elorucov/PurpleBlog" => "Source code",
+        ],
+    ],
+    [
+        "name" => "PasteViaKeySimulation",
+        "color" => "#4C939E",
+        "meta" => ["Windows", ".NET", "Tool", "2026"],
+        "logo" => ["icon" => "console48"],
+        "description" => "A utility for pasting text from the clipboard by simulating physical key presses.",
+        "links" => [
+            "https://github.com/Elorucov/PasteViaKeySimulation/releases" => "Download from GitHub",
+            "https://github.com/Elorucov/PasteViaKeySimulation" => "Source code",
+        ],
+    ],
+    [
+        "name" => "VKUI Tokens to Avalonia XAML",
+        "color" => "#0077ff",
+        "meta" => ["Desktop", ".NET", "Tool", "2026"],
+        "logo" => ["icon" => "console48"],
+        "description" => "A CLI tool that converts colors, sizes and font metrics from vkui-tokens into Avalonia's XAML resource.",
+        "links" => [
+            "https://github.com/Elorucov/VKUI-Tokens-To-Avalonia-XAML" => "Source code",
+        ],
+    ],
+    [
+        "name" => "Emoji list creator",
+        "color" => "#00cc55",
+        "meta" => ["Desktop", ".NET", "Tool", "2022"],
+        "logo" => ["icon" => "console48"],
+        "description" => "A CLI tool for generating emoji list.",
+        "links" => [
+            "https://github.com/Elorucov/EmojiListCreatorTool" => "Source code",
+        ],
+    ],
+    [
+        "name" => "MatrixBugtracker",
+        "color" => "#049735",
+        "meta" => ["Web", ".NET", "API", "2025"],
+        "logo" => ["icon" => "globe48"],
+        "description" => "An API service created for demonstration and educational purposes.",
+        "links" => [
+            "https://github.com/Elorucov/MatrixBugtracker" => "Source code",
+        ],
+        "techStack" => [
+            "<b>N-Layer</b> architecture &amp; <b>S.O.L.I.D.</b> principles;",
+            "<b>Repository &amp; Unit-of-Work</b> pattern;",
+            '<a href="https://automapper.io/" target="_blank">Automapper</a>;',
+            '<a href="https://fluentvalidation.net/" target="_blank">FluentValidation</a>;',
+            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging;',
+        ],
+    ],
+    [
+        "name" => "“LWUI”",
+        "color" => "#447BBA",
+        "meta" => ["Web", ".NET", "Site", "2025"],
+        "logo" => ["icon" => "globe48"],
+        "description" => "A web project that demonstrates useful features for SSR-based web sites.",
+        "links" => [
+            "https://elor.top/demos/lwui" => "Demo",
+            "https://github.com/Elorucov/ASPNET-LightweightWebUIBoilerplate" => "Source code",
+        ],
+    ],
+    [
+        "name" => "PrefsLite",
+        "color" => "#7f7f7f",
+        "meta" => ["Library", ".NET", "2023"],
+        "logo" => ["icon" => "library48"],
+        "description" => "Yet another lightweight library for saving preferences and settings into a file.",
+        "links" => [
+            "https://www.nuget.org/packages/ELOR.PrefsLite/" => "Nuget",
+            "https://github.com/Elorucov/PrefsLite" => "Source code",
+        ],
+    ],
+    [
+        "name" => "VKUI.Avalonia",
+        "color" => "#0077ff",
+        "meta" => ["Library", ".NET", "Avalonia", "2022"],
+        "logo" => ["icon" => "library48"],
+        "description" => "VKUI design implementation for Avalonia.",
+        "links" => [
+            "https://github.com/Elorucov/VKUI.Avalonia" => "Source code",
+        ],
+    ],
+];
+
+// ---------------------------------------------------------------------------
+// Contacts
+// ---------------------------------------------------------------------------
+$contacts = [
+    [
+        "name" => "Telegram",
+        "link" => "https://telegram.me/elorucov",
+        "color" => "#179CDE",
+        "logo" => "telegram",
+        "description" => "The main way to contact me",
+    ],
+    [
+        "name" => "Github",
+        "link" => "https://github.com/Elorucov",
+        "logo" => "github",
+        "description" => "Explore source code of my projects",
+    ],
+    [
+        "name" => "LinkedIn",
+        "link" => "https://linkedin.com/in/Elorucov",
+        "color" => "#0A66C2",
+        "logo" => "linkedin",
+        "description" => "For employers and HR",
+    ],
+    [
+        "name" => "VKontakte",
+        "link" => "https://vk.com/elorucov",
+        "color" => "#0077FF",
+        "logo" => "vk",
+        "description" => "For Russian speakers",
+    ],
+    [
+        "name" => "Instagram",
+        "link" => "https://instagram.com/elorucov",
+        "color" => "#ff5c00",
+        "logo" => "instagram",
+        "description" => "<i>Nothing interesting there. Yet.</i>",
+    ],
+    [
+        "name" => "E-mail",
+        "link" => "mailto:elorucov@live.ru",
+        "logo" => "mail",
+        "description" => "<code>elorucov@live.ru</code>",
+    ],
+];
+
+$contactsMore = [
+    [
+        "name" => "Discord",
+        "link" => "https://discordapp.com/users/565614369334099976",
+        "color" => "#5865F2",
+        "logo" => "discord",
+        "description" => "",
+    ],
+    [
+        "name" => "Twitter",
+        "link" => "https://twitter.com/elorucov_az",
+        "color" => "#1d9bf0",
+        "logo" => "twitter",
+        "description" => "Yes, Twitter, not 𝕏",
+    ],
+    [
+        "name" => "Mastodon",
+        "link" => "https://dotnet.social/@elor",
+        "color" => "#5B49DE",
+        "logo" => "mastodon",
+        "description" => "International: elor@dotnet.social",
+    ],
+    [
+        "name" => "Smithereen",
+        "link" => "https://friends.grishka.me/oru",
+        "color" => "#4C6E00",
+        "logo" => "smithereen",
+        "description" => "Russian: oru@friends.grishka.me",
+    ],
+];
+
+/** Renders a list of contact cards */
+function renderContacts(array $list): void
+{
+    foreach ($list as $c): ?>
+        <a href="<?= e($c["link"]) ?>" class="card"<?= !empty($c["color"]) ? ' style="--accent:' . e($c["color"]) . '"' : "" ?>>
+            <aside>
+                <svg>
+                    <use href="res/impressive_landing/icons.svg#<?= e($c["logo"]) ?>"></use>
+                </svg>
+            </aside>
+            <section class="cardContent">
+                <header><?= e($c["name"]) ?></header>
+                <content>
+                    <?= $c["description"] ?>
+                </content>
+            </section>
+        </a>
+    <?php endforeach;
+}
+
+// ---------------------------------------------------------------------------
+// Blog posts
+// ---------------------------------------------------------------------------
+
+$postsContent = file_get_contents("blog/posts.json");
+$posts = json_decode($postsContent, true);
+$posts = array_reverse($posts);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
+        <title>ELOR | Elchin Orujov</title>
+        <meta name="description" content="Software developer from Azerbaijan."/>
+        <meta name="test:lang" content="<?= $lang ?>"/>
+
+        <!-- og meta -->
+        <meta property="og:type" value="website" />
+        <meta property="og:description" value="Software developer from Azerbaijan." />
+        <meta property="og:url" value="<?= $currentUrl; ?>" />
+        <meta property="og:title" value="ELOR | Elchin Orujov" />
+        <meta property="og:image" value="<?= $currentUrl; ?>res/impressive_landing/elor_232_2x.jpg" />
+        <meta property="og:image:alt" value="Elchin itself" />
+        <meta property="og:image:width" value="464" />
+        <meta property="og:image:height" value="464" />
+
+        <!-- resources -->
+        <link rel="stylesheet" type="text/css" href="res/impressive_landing/style.css"/>
+    </head>
+    <body>
+        <main>
+            <nav id="mainMenu">
+                <!--<decor></decor>-->
+                <input type="radio" name="tabs" id="about" checked/>
+                <label for="about"><span>about</span></label>
+                <input type="radio" name="tabs" id="projects"/>
+                <label for="projects"><span>portfolio</span></label>
+                <input type="radio" name="tabs" id="contacts"/>
+                <label for="contacts"><span>contacts</span></label>
+                <input type="radio" name="tabs" id="moret"/>
+                <label for="moret"><span>more</span></label>
+                <decor></decor>
+            </nav>
+            <content id="aboutTab">
+                <div id="personPictureFrame">
+                    <picture>
+                        <source srcset="res/impressive_landing/elor_232.webp, res/impressive_landing/elor_232_2x.webp 2x" type="image/webp">
+                        <source srcset="res/impressive_landing/elor_232.jpg, res/impressive_landing/elor_232_2x.jpg 2x" type="image/jpeg">
+                        <img fetchpriority="high" alt="Elchin itself" src="res/impressive_landing/elor_232_2x.jpg">
+                    </picture>
+                    <left-handler></left-handler>
+                </div>
+                <h1>Elchin Orujov</h1>
+                <p class="asParagraph">a.k.a. ELOR and Elorucov</p>
+                <p>Software developer from Azerbaijan. 🇦🇿<br><b><?php echo $age; ?> y. o.</b> with <b>10+ years</b> of software development experience.</p>
+                <p>&nbsp;</p>
+
+                <h2>👨🏻‍💻 What I am developing</h2>
+
+                <div class="mainTabCards adaptiveGrid">
+                    <div class="card" style="--accent:#0078d7">
+                        <aside>
+                            <svg>
+                                <use href="res/impressive_landing/icons.svg#mswindows36"></use>
+                            </svg>
+                        </aside>
+                        <section class="cardContent">
+                            <header>Native apps for Windows</header>
+                            <content>
+                                <chips>
+                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
+                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/windows/uwp/get-started/">UWP</a>
+                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/">WinUI 3</a>
+                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/">WPF</a>
+                                    <a class="chip less" target="_blank" href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/">WinForms</a>
+                                </chips>
+                            </content>
+                        </section>
+                    </div>
+
+                    <div class="card" style="--accent:#00aa66">
+                        <aside>
+                            <svg>
+                                <use href="res/impressive_landing/icons.svg#window36"></use>
+                            </svg>
+                        </aside>
+                        <section class="cardContent">
+                            <header>Cross-platform desktop apps</header>
+                            <content>
+                                <chips>
+                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
+                                    <a class="chip" target="_blank" href="https://avaloniaui.net">Avalonia</a>
+                                </chips>
+                            </content>
+                        </section>
+                    </div>
+
+                    <div class="card" style="--accent:#7e7e7e">
+                        <aside>
+                            <svg>
+                                <use href="res/impressive_landing/icons.svg#console36"></use>
+                            </svg>
+                        </aside>
+                        <section class="cardContent">
+                            <header>Tools, utilities and bots</header>
+                            <content>
+                                <chips>
+                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
+                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/powershell/">PowerShell</a>
+                                </chips>
+                            </content>
+                        </section>
+                    </div>
+
+                    <div class="card" style="--accent:var(--color1);">
+                        <aside>
+                            <svg>
+                                <use href="res/impressive_landing/icons.svg#globe36"></use>
+                            </svg>
+                        </aside>
+                        <section class="cardContent">
+                            <header>Web-pages & API</header>
+                            <content>
+                                <chips>
+                                    <a class="chip" target="_blank" href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.NET Core</a>
+                                    <a class="chip less" target="_blank" href="https://php.net">PHP</a>
+                                    <span class="chip">JavaScript</span>
+                                    <span class="chip less">React</span>
+                                </chips>
+                            </content>
+                        </section>
+                    </div>
+                </div>
+
+
+                <h2>🛠️ Skills</h2>
+
+                <h3>.NET</h3>
+                <ul>
+                    <li><b>C#</b> — primary programming language;</li>
+                    <li><b>ADO.NET, Entity Framework Core</b> — for working with DB;</li>
+                    <li><b>ASP.NET Core (Web API and MVC)</b> as backend for web-services;</li>
+                    <li><b>LINQ</b>;</li>
+                    <li><b>MVVM</b> pattern in GUI apps;</li>
+                    <li>Popular libraries I have experience: <b><a href="https://www.newtonsoft.com/json" target="_blank">Newtonsoft.Json</a>, <a href="https://serilog.net/" target="_blank">Serilog</a>, <a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/introduction" target="_blank">Community Toolkit</a>, xUnit</b>…</li>
+                </ul>
+
+                <h3>Web</h3>
+                <ul>
+                    <li><b>HTML5 & CSS3 & Vanilla JS</b> — for making landing pages, blogs, demos, etc;</li>
+                    <li>Have experience with <b><a href="https://nginx.org" target="_blank">nginx</a></b> and, more recently, <b><a href="https://caddyserver.com" target="_blank">Caddy</a></b>;</li>
+                    <li><b>PHP</b> — for “lightweight” web services (when ASP.NET is too “heavy”);</li>
+                    <li><b>React</b> — have a little experience.</li>
+                </ul>
+
+                <h3>Databases</h3>
+                <ul>
+                    <li><b>MySQL</b> — primary.</li>
+                    <li>Also known <b>PostgreSQL, SQL Server</b> and <b>SQLite</b> — but less.</li>
+                </ul>
+
+                <h3>Other IT-related skills</h3>
+                <ul>
+                    <li><b>Git</b> and <b>CI/CD</b> — automatically build an app for different platforms after a push;</li>
+                    <li><b>IT helpdesk</b> — install and setup various Windows and Linux-based OS and software, solving software problems;</li>
+                    <li><b>Programming in 1C:Enterprise</b> — thanks to my <a href="https://linkedin.com/company/icgroup-az/" target="_blank">current job</a>;</li>
+                    <li>Making simple <b>SVG icons and logos</b> (like those you can see on this page).</li>
+                </ul>
+
+                <h2>👨🏻 A little more about me</h2>
+                <p><b>Languages</b>: Azerbaijani (native), Russian (excellent), English (B1).</p>
+                <p>I quickly learn and become proficient in technologies, programming languages, and frameworks I haven't worked with before.</p>
+                <p>I strive to write <b>fast, responsive, and lightweight</b> software: in particular, I try to minimize the use of third-party libraries whenever possible.</p>
+                <p>I rarely use artificial intelligence, and I have never used it when developing my projects.</p>
+            </content>
+
+            <content id="projectsTab">
+                <h1>💼 Portfolio</h1>
+                <p>Below are apps, tools, libraries and services that I developed. Visit to <a href="https://github.com/Elorucov" target="_blank">my Github profile</a> to see all my projects.</p>
+                <div class="adaptiveGrid">
+                    <?php foreach ($projects as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
+                        <div class="card" style="--accent:<?= e($p["color"]) ?>">
+                            <?php if (isset($logo["icon"])): ?>
+                                <aside>
+                                    <svg>
+                                        <use href="res/impressive_landing/icons.svg#<?= e($logo["icon"]) ?>"></use>
+                                    </svg>
+                                </aside>
+                            <?php elseif (isset($logo["light"], $logo["dark"])): ?>
+                                <picture>
+                                    <source loading="lazy" media="(prefers-color-scheme: dark)" height="48px" srcset="<?= e($logo["dark"]) ?>">
+                                    <source loading="lazy" media="(prefers-color-scheme: light)" height="48px" srcset="<?= e($logo["light"]) ?>">
+                                    <img loading="lazy" src="<?= e(pngFallback($logo["light"])) ?>">
+                                </picture>
+                            <?php else: ?>
+                                <picture>
+                                    <source loading="lazy" width="48px" srcset="<?= e($logo["src"]) ?>">
+                                    <img loading="lazy" src="<?= e(pngFallback($logo["src"])) ?>">
+                                </picture>
+                            <?php endif; ?>
+                            <section class="cardContent">
+                                <header><?= e($p["name"]) ?></header>
+                                <content>
+                                    <aside class="meta"><?= e(implode(" · ", $p["meta"])) ?></aside>
+                                    <?= e($p["description"]) ?><br>
+                                    <?php $n = 0; foreach ($p["links"] as $url => $text): ?><?= $n++ ? " · " : "" ?><a target="_blank" href="<?= e($url) ?>"><?= e($text) ?></a><?php endforeach; ?>
+                                    <?php if (!empty($p["techStack"])): ?><?= $n ? " · " : "" ?>
+                                    <input type="checkbox" class="dlg" id="<?= $techId ?>">
+                                    <label for="<?= $techId ?>">Tech stack</label>
+                                        <div class="dlg_wrap">
+                                            <label class="dlg_closer" for="<?= $techId ?>"></label>
+                                            <div class="dlg_content">
+                                                <ul>
+                                                    <?php foreach ($p["techStack"] as $tech): ?>
+                                                        <li><?= $tech ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </content>
+                            </section>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </content>
+
+            <content id="contactsTab">
+                <h1>🖊️ Contacts</h1>
+                <p>Here's where you can find me:</p>
+                <div class="adaptiveGrid">
+                    <?php renderContacts($contacts); ?>
+                </div>
+
+                <h2>📝 Also...</h2>
+                <div class="adaptiveGrid">
+                    <?php renderContacts($contactsMore); ?>
+                </div>
+            </content>
+
+            <content id="moreTab">
+                <div class="adaptiveGrid">
+                    <section>
+                        <header>
+                            <h2>📝 Blog</h2>
+                        </header>
+                        <content>
+                            <ul>
+                                <?php foreach ($posts as $post): $pubDate = strtotime($post["PublishDate"]); ?>
+                                    <li>
+                                        <a target="_blank" href="https://elor.top/blog/<?= $post["RelativeUrl"] ?>">
+                                            <?= $post["Title"] ?>
+                                        </a>
+                                        <pubdate><?= date("F j Y", $pubDate) ?></pubdate>
+                                        <summary><?= $post["Summary"] ?></summary>
+                                    </li>
+                                <?php endforeach; ?>
+                                <li><a target="_blank" href="https://elor.top/blog">More →</a></li>
+                            </ul>
+                        </content>
+                    </section>
+
+                    <section>
+                        <header>
+                            <h2>🔗 Links</h2>
+                        </header>
+                        <content>
+                            <ul>
+                                <li>
+                                    <a href="https://elor.top/res/docs/cv_en.pdf">My CV.</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://elor.top/mustread">Must read articles</a>
+                                    <summary>Links to articles that I consider essential reading for software engineers, UI/UX designers, and other IT professionals</summary>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://github.com/nnttttyyppee/NT-Somic">NT Somic font</a>
+                                    <summary>A font that used in this page and in logos in some my projects. Author: <a target="_blank" href="https://nnttttyyppee.cc/">NT Type</a>.</summary>
+                                </li>
+                            </ul>
+                        </content>
+                    </section>
+
+                    <section>
+                        <header>
+                            <h2>🤝 People</h2>
+                        </header>
+                        <content>
+                            <ul>
+                                <li>
+                                    <a target="_blank" href="https://sominemo.com">sominemo.com</a>
+                                    <summary>Sergey Dilong (sominemo) — web and Flutter apps developer &amp; artist. Author of logos for Laney and WidgetShot.</summary>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://tonsky.me">tonsky.me</a>
+                                    <summary>Nikita Prokopov (nikitonsky) — software engineer. I'm taking notes on his posts about how <i>not</i> to develop software and make UI.</summary>
+                                </li>
+                            </ul>
+                        </content>
+                    </section>
+                </div>
+                <branding>
+                    <svg>
+                        <use href="res/impressive_landing/icons.svg#brand"></use>
+                    </svg>
+                </branding>
+            </content>
+        </main>
+    </body>
+</html>
