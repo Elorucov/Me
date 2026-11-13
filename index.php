@@ -590,14 +590,14 @@ $posts = array_reverse($posts);
                             <ul>
                                 <?php foreach ($posts as $post): $pubDate = strtotime($post["PublishDate"]); ?>
                                     <li>
-                                        <a target="_blank" href="https://elor.top/blog/<?= $post["RelativeUrl"] ?>">
+                                        <a target="_blank" href="<?= BLOG_URL . $post["RelativeUrl"] ?>">
                                             <?= $post["Title"] ?>
                                         </a>
                                         <pubdate><?= date("F j Y", $pubDate) ?></pubdate>
                                         <summary><?= $post["Summary"] ?></summary>
                                     </li>
                                 <?php endforeach; ?>
-                                <li><a target="_blank" href="https://elor.top/blog">More →</a></li>
+                                <li><a target="_blank" href="<?= BLOG_URL; ?>">More →</a></li>
                             </ul>
                         </content>
                     </section>

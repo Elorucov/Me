@@ -8,7 +8,7 @@ PHP, HTML, CSS and... that's all.
 
 ## Information for developers
 
-All you need is a web server and PHP. That’s it. There’s no need for any "build tools" or "compilers"—you simply upload the files to your server.
+All you need is a web server and PHP. That’s it. There’s no need for any "build tools" or "compilers" — you simply upload the files to your server.
 
 This page doesn’t even use JavaScript, let alone libraries like React; as a result, it loads and opens faster and has a smaller file size.
 
