@@ -352,8 +352,8 @@ $posts = array_reverse($posts);
 
                 <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
-                <div class="mainTabCards adaptiveGrid">
-                    <div class="card" style="--accent:#0078d7">
+                <div class="adaptiveGrid">
+                    <div class="card knowledgeCard" style="--accent:#0078d7">
                         <aside>
                             <svg>
                                 <use href="res/impressive_landing/icons.svg#mswindows36"></use>
@@ -373,7 +373,7 @@ $posts = array_reverse($posts);
                         </section>
                     </div>
 
-                    <div class="card" style="--accent:#00aa66">
+                    <div class="card knowledgeCard" style="--accent:#00aa66">
                         <aside>
                             <svg>
                                 <use href="res/impressive_landing/icons.svg#window36"></use>
@@ -390,7 +390,7 @@ $posts = array_reverse($posts);
                         </section>
                     </div>
 
-                    <div class="card" style="--accent:#7e7e7e">
+                    <div class="card knowledgeCard" style="--accent:#7e7e7e">
                         <aside>
                             <svg>
                                 <use href="res/impressive_landing/icons.svg#console36"></use>
@@ -407,7 +407,7 @@ $posts = array_reverse($posts);
                         </section>
                     </div>
 
-                    <div class="card" style="--accent:var(--color1);">
+                    <div class="card knowledgeCard" style="--accent:var(--color1);">
                         <aside>
                             <svg>
                                 <use href="res/impressive_landing/icons.svg#globe36"></use>

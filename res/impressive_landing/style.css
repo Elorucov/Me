@@ -206,7 +206,6 @@ body > main {
 }
 
 #mainMenu > label > span {
-    z-index: 1;
     position: relative;
 }
 
@@ -556,31 +555,27 @@ a.chip:hover {
     opacity: 0.5;
 }
 
-.mainTabCards {
-    margin-bottom: -16px;
-}
-
-.mainTabCards > .card {
+.knowledgeCard {
     border-top: 0px;
 }
 
-.mainTabCards > .card > aside:first-child {
+.knowledgeCard > aside:first-child {
     width: 36px;
     height: 36px;
     align-items: start;
 }
 
-.mainTabCards > .card > aside:first-child > svg {
+.knowledgeCard > aside:first-child > svg {
     width: inherit;
     height: inherit;
 }
 
-.mainTabCards > .card > section.cardContent {
+.knowledgeCard > section.cardContent {
     background: transparent;
     margin-left: 12px;
 }
 
-.mainTabCards > .card > section.cardContent > header {
+.knowledgeCard > section.cardContent > header {
     padding: 5px 0px 0px 0px;
     font-family: inherit;
     font-weight: 600;
@@ -589,11 +584,11 @@ a.chip:hover {
     font-size: 1.125em;
 }
 
-.mainTabCards > .card > section.cardContent > content {
+.knowledgeCard > section.cardContent > content {
     padding: 0px;
 }
 
-.mainTabCards > .card chips {
+.knowledgeCard chips {
     margin: 6px 0px;
 }
 
@@ -794,7 +789,7 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
         clear: both;
     }
 
-    .mainTabCards > .card {
+    .knowledgeCard {
         padding-right: 0px;
     }
 
