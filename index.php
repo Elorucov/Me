@@ -2,10 +2,7 @@
 
 <?php
 
-function e(string $s): string
-{
-    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
-}
+require_once 'inc/i18n.php';
 
 /** .png fallback for a .webp logo images */
 function pngFallback(string $url): string
@@ -13,64 +10,21 @@ function pngFallback(string $url): string
     return preg_replace('/\.webp$/', ".png", $url);
 }
 
-const SUPPORTED_LANGS = ['en', 'ru', 'az'];
-const LANG_COOKIE = "homePageLang";
-const BLOG_URL = "https://elor.top/blog/";
-
-function detectLang(array $supported = SUPPORTED_LANGS, string $default = 'en'): string
+/** Parse template. Example: t("Hello, {text}!", ["text" => "world"]); */
+function t(string $text, array $vars = []): string
 {
-    // 1. Cookie
-    $cookie = strtolower($_COOKIE[LANG_COOKIE] ?? '');
-    if (in_array($cookie, $supported, true)) {
-        return $cookie;
-    }
-
-    // 2. Accept-Language: "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
-    $header = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
-    $candidates = [];
-
-    foreach (explode(',', $header) as $i => $part) {
-        $bits = explode(';', trim($part));
-        $tag  = strtolower(trim($bits[0]));
-        $q    = 1.0;
-
-        if (isset($bits[1]) && preg_match('/^\s*q\s*=\s*([\d.]+)/i', $bits[1], $m)) {
-            $q = (float)$m[1];
-        }
-        if ($tag === '' || $tag === '*' || $q <= 0) {
-            continue;
-        }
-
-        $candidates[] = [explode('-', $tag)[0], $q, $i]; // "ru-RU" → "ru"
-    }
-
-    // sort by descending
-    usort($candidates, fn($a, $b) => $b[1] <=> $a[1] ?: $a[2] <=> $b[2]);
-
-    foreach ($candidates as [$code]) {
-        if (in_array($code, $supported, true)) {
-            return $code;
-        }
-    }
-
-    // 3. Ничего не подошло
-    return $default;
+    $repl = [];
+    foreach ($vars as $k => $v) $repl['{' . $k . '}'] = $v;
+    return strtr($text, $repl);
 }
 
-header('Vary: Accept-Language, Cookie');
+const BLOG_URL = "https://elor.top/blog/";
+$currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-// Set language by "?lang=" parameter.
-if (isset($_GET['lang']) && in_array($_GET['lang'], SUPPORTED_LANGS, true)) {
-    setcookie('lang', $_GET['lang'], [
-        'expires'  => time() + 365 * 24 * 3600,
-        'path'     => '/',
-        'samesite' => 'Lax',
-    ]);
-    $_COOKIE[LANG_COOKIE] = $_GET['lang'];
-}
+updateLang($currentUrl);
 
 $lang = detectLang();
-$currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$l = array_replace(loadLangFile('en', 'locale.php'), loadLangFile($lang, 'locale.php') ?? []);
 
 // Age
 $birthDate = explode("/", "02/05/1998");
@@ -348,19 +302,18 @@ $posts = array_reverse($posts);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $lang ?>">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
-        <title>ELOR | Elchin Orujov</title>
-        <meta name="description" content="Software developer from Azerbaijan."/>
-        <meta name="test:lang" content="<?= $lang ?>"/>
+        <title>ELOR | <?= $l["name"] ?></title>
+        <meta name="description" content="<?= $l["page_desc"] ?>"/>
 
         <!-- og meta -->
         <meta property="og:type" value="website" />
-        <meta property="og:description" value="Software developer from Azerbaijan." />
+        <meta property="og:description" value="<?= $l["page_desc"] ?>" />
         <meta property="og:url" value="<?= $currentUrl; ?>" />
-        <meta property="og:title" value="ELOR | Elchin Orujov" />
+        <meta property="og:title" value="ELOR | <?= $l["name"] ?>" />
         <meta property="og:image" value="<?= $currentUrl; ?>res/impressive_landing/elor_232_2x.jpg" />
         <meta property="og:image:alt" value="Elchin itself" />
         <meta property="og:image:width" value="464" />
@@ -374,13 +327,13 @@ $posts = array_reverse($posts);
             <nav id="mainMenu">
                 <!--<decor></decor>-->
                 <input type="radio" name="tabs" id="about" checked/>
-                <label for="about"><span>about</span></label>
+                <label for="about"><span><?= mb_strtolower($l["about"]) ?></span></label>
                 <input type="radio" name="tabs" id="projects"/>
-                <label for="projects"><span>portfolio</span></label>
+                <label for="projects"><span><?= mb_strtolower($l["portfolio"]) ?></span></label>
                 <input type="radio" name="tabs" id="contacts"/>
-                <label for="contacts"><span>contacts</span></label>
+                <label for="contacts"><span><?= mb_strtolower($l["contacts"]) ?></span></label>
                 <input type="radio" name="tabs" id="moret"/>
-                <label for="moret"><span>more</span></label>
+                <label for="moret"><span><?= mb_strtolower($l["more"]) ?></span></label>
                 <decor></decor>
             </nav>
             <content id="aboutTab">
@@ -392,12 +345,12 @@ $posts = array_reverse($posts);
                     </picture>
                     <left-handler></left-handler>
                 </div>
-                <h1>Elchin Orujov</h1>
-                <p class="asParagraph">a.k.a. ELOR and Elorucov</p>
-                <p>Software developer from Azerbaijan. 🇦🇿<br><b><?php echo $age; ?> y. o.</b> with <b>10+ years</b> of software development experience.</p>
+                <h1><?= $l["name"] ?></h1>
+                <p class="asParagraph">ELOR / Elorucov</p>
+                <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?></p>
                 <p>&nbsp;</p>
 
-                <h2>👨🏻‍💻 What I am developing</h2>
+                <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
                 <div class="mainTabCards adaptiveGrid">
                     <div class="card" style="--accent:#0078d7">
@@ -475,7 +428,7 @@ $posts = array_reverse($posts);
                 </div>
 
 
-                <h2>🛠️ Skills</h2>
+                <h2>🛠️ <?= $l["skills"] ?></h2>
 
                 <h3>.NET</h3>
                 <ul>
@@ -509,7 +462,7 @@ $posts = array_reverse($posts);
                     <li>Making simple <b>SVG icons and logos</b> (like those you can see on this page).</li>
                 </ul>
 
-                <h2>👨🏻 A little more about me</h2>
+                <h2>👨🏻 <?= $l["about_extra"] ?></h2>
                 <p><b>Languages</b>: Azerbaijani (native), Russian (excellent), English (B1).</p>
                 <p>I quickly learn and become proficient in technologies, programming languages, and frameworks I haven't worked with before.</p>
                 <p>I strive to write <b>fast, responsive, and lightweight</b> software: in particular, I try to minimize the use of third-party libraries whenever possible.</p>
@@ -517,7 +470,7 @@ $posts = array_reverse($posts);
             </content>
 
             <content id="projectsTab">
-                <h1>💼 Portfolio</h1>
+                <h1>💼 <?= $l["portfolio"] ?></h1>
                 <p>Below are apps, tools, libraries and services that I developed. Visit to <a href="https://github.com/Elorucov" target="_blank">my Github profile</a> to see all my projects.</p>
                 <div class="adaptiveGrid">
                     <?php foreach ($projects as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
@@ -568,7 +521,7 @@ $posts = array_reverse($posts);
             </content>
 
             <content id="contactsTab">
-                <h1>🖊️ Contacts</h1>
+                <h1>🖊️ <?= $l["contacts"] ?></h1>
                 <p>Here's where you can find me:</p>
                 <div class="adaptiveGrid">
                     <?php renderContacts($contacts); ?>
