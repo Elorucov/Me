@@ -6,28 +6,55 @@
     --color4: #ffa000;
     --color5: #f060c0;
 
-    --page_background: #f0f0f0;
-    --page_foreground: #000;
-    --on_page_background: #fff;
-    --section_separator_color: #000;
+    /* Light */
+    --page_background_l: #f0f0f0;
+    --page_foreground_l: #000;
+    --on_page_background_l: #fff;
+    --section_separator_color_l: #000;
+
+    /* Dark */
+    --page_background_d: #161616;
+    --page_foreground_d: #fff;
+    --on_page_background_d: #222;
+    --section_separator_color_d: #fff;
+
+    --page_background: light-dark(var(--page_background_l), var(--page_background_d));
+    --page_foreground: light-dark(var(--page_foreground_l), var(--page_foreground_d));
+    --on_page_background: light-dark(var(--on_page_background_l), var(--on_page_background_d));
+    --section_separator_color: light-dark(var(--section_separator_color_l), var(--section_separator_color_d));
 }
 
-@media (prefers-color-scheme: dark) {
+
+/* Fallback for old browsers */
+@supports not (color: light-dark(#fff, #000)) {
     :root {
-        --page_background: #161616;
-        --page_foreground: #fff;
-        --on_page_background: #222;
-        --section_separator_color: #fff;
+        --page_background: var(--page_background_l);
+        --page_foreground: var(--page_foreground_l);
+        --on_page_background: var(--on_page_background_l);
+        --section_separator_color: var(--section_separator_color_l);
+
+        @media (prefers-color-scheme: dark) {
+            /* Fallback for old browsers */
+            --page_background: var(--page_background_l);
+            --page_foreground: var(--page_foreground_l);
+            --on_page_background: var(--on_page_background_l);
+            --section_separator_color: var(--section_separator_color_l);
+        }
     }
 }
 
 :root {
+    /* For Windows, because it use "Courier" as default mono font  */
+    --mono_font: "Cascadia Mono", "Consolas", "Lucida Console", monospace;
+
     --animation_slowdown_multiplier: 1;
     --content_max_width: 960px;
     --bars_size: 4px;
     --big_spacing: 32px;
     --content_item_spacing: 16px;
     --person_picture_size: 232px;
+    --knowledge_card_size: 36px;
+    --knowledge_card_icon_plate_offset_top: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,6 +149,19 @@ body {
         "Segoe UI Symbol";
     font-optical-sizing: auto;
     font-style: normal;
+    color-scheme: light;
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+}
+
+body.light {
+    color-scheme: light !important;
+}
+
+body.dark {
+    color-scheme: dark !important;
 }
 
 h1,
@@ -383,6 +423,11 @@ content h2 {
     border-bottom: 1px solid var(--accent);
 }
 
+content h1.noBorder, content h2.noBorder {
+    border-bottom: 0px;
+    padding-bottom: 0em;
+}
+
 content h3 {
     font-size: 1.25em;
 }
@@ -534,7 +579,6 @@ chips {
 
 chips .chip {
     background: var(--accent);
-    /* filter: saturate(2) brightness(0.8) contrast(1.7); */
     color: white;
     padding: 2px 6px;
     margin-bottom: 4px;
@@ -552,22 +596,56 @@ a.chip:hover {
 }
 
 .chip.less {
-    opacity: 0.5;
+    opacity: 0.65;
 }
 
 .knowledgeCard {
+    position: relative;
+    background: var(--on_page_background);
     border-top: 0px;
+    margin-top: var(--knowledge_card_icon_plate_offset_top) !important;
+    margin-bottom: calc(16px - var(--knowledge_card_icon_plate_offset_top)) !important;
+}
+
+.knowledgeCard:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -1px;
+    width: calc(100% - var(--knowledge_card_size) - var(--knowledge_card_icon_plate_offset_top));
+    height: 1px;
+    z-index: 1;
+    background: var(--accent);
 }
 
 .knowledgeCard > aside:first-child {
-    width: 36px;
-    height: 36px;
+    padding: 12px;
+    margin: calc(var(--knowledge_card_icon_plate_offset_top) * -1) 0px 0px var(--knowledge_card_icon_plate_offset_top);
+    background: var(--accent);
+    width: var(--knowledge_card_size);
+    height: var(--knowledge_card_size);
     align-items: start;
+    position: relative;
+}
+
+.knowledgeCard > aside:first-child:before {
+    content: '';
+    position: absolute;
+    right: calc(var(--knowledge_card_icon_plate_offset_top) * -1);
+    top: 0;
+    width: var(--knowledge_card_icon_plate_offset_top);
+    height: var(--knowledge_card_icon_plate_offset_top);
+    border-width: calc(var(--knowledge_card_icon_plate_offset_top) / 2);
+    border-color: transparent transparent var(--accent) var(--accent);
+    border-style: solid;
+    box-sizing: border-box;
+    filter: brightness(0.7);
 }
 
 .knowledgeCard > aside:first-child > svg {
     width: inherit;
     height: inherit;
+    color: #fff;
 }
 
 .knowledgeCard > section.cardContent {
@@ -581,15 +659,25 @@ a.chip:hover {
     font-weight: 600;
     background: unset;
     color: unset;
-    font-size: 1.125em;
 }
 
 .knowledgeCard > section.cardContent > content {
     padding: 0px;
 }
 
-.knowledgeCard chips {
-    margin: 6px 0px;
+.knowledgeCard chips .chip {
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--mono_font);
+    padding: 0px;
+}
+
+.knowledgeCard chips .chip:not(:last-child) {
+    margin-right: 6px;
+}
+
+.knowledgeCard chips a.chip {
+    text-decoration: underline;
 }
 
 #personPictureFrame {
@@ -758,11 +846,14 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     margin-bottom: 0px;
 }
 
-@media (prefers-color-scheme: dark) {
-    #contactsTab .card > aside:first-child > svg,
-    .card > section.cardContent > content > input[type="checkbox"].dlg + label,
-    .card content a:not(.chip) {
-        filter: brightness(1.25);
+body:not(.light) {
+    @media (prefers-color-scheme: dark) {
+        #contactsTab .card > aside:first-child > svg,
+        .card > section.cardContent > content > input[type="checkbox"].dlg + label,
+        .card content a:not(.chip),
+        .knowledgeCard chips > .chip {
+            filter: brightness(1.25);
+        }
     }
 }
 

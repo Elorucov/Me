@@ -14,7 +14,13 @@ return [
 
     "knowledge_title" => "What I am developing",
     "skills" => "Skills",
-    "about_extra" => "A little more about me"
+    "about_extra" => "A little more about me",
+
+    "knowledge_windows_dev" => "Native apps for Windows",
+    "knowledge_crossplatform_ui" => "Cross-platform apps",
+    "knowledge_crossplatform_ui_notice" => "Only for desktop OS",
+    "knowledge_tools" => "Tools, utilities and bots",
+    "knowledge_web" => "Web-pages, services and API"
 ];
 
 ?>

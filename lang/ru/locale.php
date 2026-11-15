@@ -14,7 +14,13 @@ return [
 
     "knowledge_title" => "Что я разрабатываю",
     "skills" => "Навыки",
-    "about_extra" => "Ещё немного обо мне"
+    "about_extra" => "Ещё немного обо мне",
+
+    "knowledge_windows_dev" => "Нативные программы для ОС Windows",
+    "knowledge_crossplatform_ui" => "Кросс-платформенные программы",
+    "knowledge_crossplatform_ui_notice" => "Только для десктопных ОС",
+    "knowledge_tools" => "Инструменты, утилиты и боты",
+    "knowledge_web" => "Web-страницы, сервисы и API"
 ];
 
 ?>

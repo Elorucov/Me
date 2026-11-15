@@ -306,6 +306,7 @@ $posts = array_reverse($posts);
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
+        <meta name="color-scheme" content="light dark" />
         <title>ELOR | <?= $l["name"] ?></title>
         <meta name="description" content="<?= $l["page_desc"] ?>"/>
 
@@ -350,7 +351,7 @@ $posts = array_reverse($posts);
                 <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?></p>
                 <p>&nbsp;</p>
 
-                <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
+                <h2 class="noBorder">👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
                 <div class="adaptiveGrid">
                     <div class="card knowledgeCard" style="--accent:#0078d7">
@@ -360,7 +361,7 @@ $posts = array_reverse($posts);
                             </svg>
                         </aside>
                         <section class="cardContent">
-                            <header>Native apps for Windows</header>
+                            <header><?= $l["knowledge_windows_dev"] ?></header>
                             <content>
                                 <chips>
                                     <a class="chip" target="_blank" href="https://dot.net">.NET</a>
@@ -380,7 +381,7 @@ $posts = array_reverse($posts);
                             </svg>
                         </aside>
                         <section class="cardContent">
-                            <header>Cross-platform desktop apps</header>
+                            <header><?= $l["knowledge_crossplatform_ui"] ?><span title="<?= $l["knowledge_crossplatform_ui_notice"] ?>">*</span></header>
                             <content>
                                 <chips>
                                     <a class="chip" target="_blank" href="https://dot.net">.NET</a>
@@ -397,7 +398,7 @@ $posts = array_reverse($posts);
                             </svg>
                         </aside>
                         <section class="cardContent">
-                            <header>Tools, utilities and bots</header>
+                            <header><?= $l["knowledge_tools"] ?></header>
                             <content>
                                 <chips>
                                     <a class="chip" target="_blank" href="https://dot.net">.NET</a>
@@ -414,7 +415,7 @@ $posts = array_reverse($posts);
                             </svg>
                         </aside>
                         <section class="cardContent">
-                            <header>Web-pages & API</header>
+                            <header><?= $l["knowledge_web"] ?></header>
                             <content>
                                 <chips>
                                     <a class="chip" target="_blank" href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.NET Core</a>
@@ -482,14 +483,15 @@ $posts = array_reverse($posts);
                                     </svg>
                                 </aside>
                             <?php elseif (isset($logo["light"], $logo["dark"])): ?>
+                                <!-- TODO: Fix wrong picture loading for different prefers-color-scheme and body theme class! -->
                                 <picture>
-                                    <source loading="lazy" media="(prefers-color-scheme: dark)" height="48px" srcset="<?= e($logo["dark"]) ?>">
-                                    <source loading="lazy" media="(prefers-color-scheme: light)" height="48px" srcset="<?= e($logo["light"]) ?>">
+                                    <source media="(prefers-color-scheme: dark)" height="48" srcset="<?= e($logo["dark"]) ?>">
+                                    <source media="(prefers-color-scheme: light)" height="48" srcset="<?= e($logo["light"]) ?>">
                                     <img loading="lazy" src="<?= e(pngFallback($logo["light"])) ?>">
                                 </picture>
                             <?php else: ?>
                                 <picture>
-                                    <source loading="lazy" width="48px" srcset="<?= e($logo["src"]) ?>">
+                                    <source width="48px" srcset="<?= e($logo["src"]) ?>">
                                     <img loading="lazy" src="<?= e(pngFallback($logo["src"])) ?>">
                                 </picture>
                             <?php endif; ?>
