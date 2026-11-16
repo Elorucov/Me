@@ -351,7 +351,7 @@ $posts = array_reverse($posts);
                 <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?></p>
                 <p>&nbsp;</p>
 
-                <h2 class="noBorder">👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
+                <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
                 <div class="adaptiveGrid">
                     <div class="card knowledgeCard" style="--accent:#0078d7">

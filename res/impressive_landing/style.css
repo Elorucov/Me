@@ -53,7 +53,7 @@
     --big_spacing: 32px;
     --content_item_spacing: 16px;
     --person_picture_size: 232px;
-    --knowledge_card_size: 36px;
+    --knowledge_card_icon_size: 36px;
     --knowledge_card_icon_plate_offset_top: 6px;
 }
 
@@ -575,15 +575,19 @@ a.card > section.cardContent > header:after {
 
 chips {
     display: block;
+    display: inline-block;
+    font-size: 0px; /* getting rid of margins */
 }
 
 chips .chip {
     background: var(--accent);
     color: white;
-    padding: 2px 6px;
-    margin-bottom: 4px;
-    font-size: 12px;
+    padding: 2px 6px 0px 6px;
+    font-size: 11px;
     font-weight: 600;
+    line-height: 16px;
+    font-family: var(--mono_font);
+    border-radius: 2px;
     display: inline-block;
 }
 
@@ -599,53 +603,24 @@ a.chip:hover {
     opacity: 0.65;
 }
 
-.knowledgeCard {
-    position: relative;
-    background: var(--on_page_background);
-    border-top: 0px;
-    margin-top: var(--knowledge_card_icon_plate_offset_top) !important;
-    margin-bottom: calc(16px - var(--knowledge_card_icon_plate_offset_top)) !important;
+.chip:not(:last-child) {
+    margin-right: 6px;
 }
 
-.knowledgeCard:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -1px;
-    width: calc(100% - var(--knowledge_card_size) - var(--knowledge_card_icon_plate_offset_top));
-    height: 1px;
-    z-index: 1;
-    background: var(--accent);
+.knowledgeCard {
+    border-top: 0px;
 }
 
 .knowledgeCard > aside:first-child {
-    padding: 12px;
-    margin: calc(var(--knowledge_card_icon_plate_offset_top) * -1) 0px 0px var(--knowledge_card_icon_plate_offset_top);
-    background: var(--accent);
-    width: var(--knowledge_card_size);
-    height: var(--knowledge_card_size);
+    width: var(--knowledge_card_icon_size);
+    height: var(--knowledge_card_icon_size);
     align-items: start;
-    position: relative;
-}
-
-.knowledgeCard > aside:first-child:before {
-    content: '';
-    position: absolute;
-    right: calc(var(--knowledge_card_icon_plate_offset_top) * -1);
-    top: 0;
-    width: var(--knowledge_card_icon_plate_offset_top);
-    height: var(--knowledge_card_icon_plate_offset_top);
-    border-width: calc(var(--knowledge_card_icon_plate_offset_top) / 2);
-    border-color: transparent transparent var(--accent) var(--accent);
-    border-style: solid;
-    box-sizing: border-box;
-    filter: brightness(0.7);
+    margin-top: 2px;
 }
 
 .knowledgeCard > aside:first-child > svg {
     width: inherit;
     height: inherit;
-    color: #fff;
 }
 
 .knowledgeCard > section.cardContent {
@@ -654,7 +629,8 @@ a.chip:hover {
 }
 
 .knowledgeCard > section.cardContent > header {
-    padding: 5px 0px 0px 0px;
+    padding: 0px;
+    line-height: 1em;
     font-family: inherit;
     font-weight: 600;
     background: unset;
@@ -665,19 +641,8 @@ a.chip:hover {
     padding: 0px;
 }
 
-.knowledgeCard chips .chip {
-    background: transparent;
-    color: var(--accent);
-    font-family: var(--mono_font);
-    padding: 0px;
-}
-
-.knowledgeCard chips .chip:not(:last-child) {
-    margin-right: 6px;
-}
-
-.knowledgeCard chips a.chip {
-    text-decoration: underline;
+.knowledgeCard chips {
+    margin: 6px 0px;
 }
 
 #personPictureFrame {
@@ -850,8 +815,7 @@ body:not(.light) {
     @media (prefers-color-scheme: dark) {
         #contactsTab .card > aside:first-child > svg,
         .card > section.cardContent > content > input[type="checkbox"].dlg + label,
-        .card content a:not(.chip),
-        .knowledgeCard chips > .chip {
+        .card content a:not(.chip) {
             filter: brightness(1.25);
         }
     }
