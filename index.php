@@ -419,7 +419,7 @@ $posts = array_reverse($posts);
                             <content>
                                 <chips>
                                     <a class="chip" target="_blank" href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.NET Core</a>
-                                    <a class="chip less" target="_blank" href="https://php.net">PHP</a>
+                                    <a class="chip" target="_blank" href="https://php.net">PHP</a>
                                     <span class="chip">JavaScript</span>
                                     <span class="chip less">React</span>
                                 </chips>
@@ -429,39 +429,46 @@ $posts = array_reverse($posts);
                 </div>
 
 
-                <h2>🛠️ <?= $l["skills"] ?></h2>
+                <h2 class="noBorder">🛠️ <?= $l["skills"] ?></h2>
 
-                <h3>.NET</h3>
-                <ul>
-                    <li><b>C#</b> — primary programming language;</li>
-                    <li><b>ADO.NET, Entity Framework Core</b> — for working with DB;</li>
-                    <li><b>ASP.NET Core (Web API and MVC)</b> as backend for web-services;</li>
-                    <li><b>LINQ</b>;</li>
-                    <li><b>MVVM</b> pattern in GUI apps;</li>
-                    <li>Popular libraries I have experience: <b><a href="https://www.newtonsoft.com/json" target="_blank">Newtonsoft.Json</a>, <a href="https://serilog.net/" target="_blank">Serilog</a>, <a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/introduction" target="_blank">Community Toolkit</a>, xUnit</b>…</li>
-                </ul>
-
-                <h3>Web</h3>
-                <ul>
-                    <li><b>HTML5 & CSS3 & Vanilla JS</b> — for making landing pages, blogs, demos, etc;</li>
-                    <li>Have experience with <b><a href="https://nginx.org" target="_blank">nginx</a></b> and, more recently, <b><a href="https://caddyserver.com" target="_blank">Caddy</a></b>;</li>
-                    <li><b>PHP</b> — for “lightweight” web services (when ASP.NET is too “heavy”);</li>
-                    <li><b>React</b> — have a little experience.</li>
-                </ul>
-
-                <h3>Databases</h3>
-                <ul>
-                    <li><b>MySQL</b> — primary.</li>
-                    <li>Also known <b>PostgreSQL, SQL Server</b> and <b>SQLite</b> — but less.</li>
-                </ul>
-
-                <h3>Other IT-related skills</h3>
-                <ul>
-                    <li><b>Git</b> and <b>CI/CD</b> — automatically build an app for different platforms after a push;</li>
-                    <li><b>IT helpdesk</b> — install and setup various Windows and Linux-based OS and software, solving software problems;</li>
-                    <li><b>Programming in 1C:Enterprise</b> — thanks to my <a href="https://linkedin.com/company/icgroup-az/" target="_blank">current job</a>;</li>
-                    <li>Making simple <b>SVG icons and logos</b> (like those you can see on this page).</li>
-                </ul>
+                <div class="masonryGrid">
+                    <div class="infoblock">
+                        <header>.NET</header>
+                        <ul>
+                            <li><?= $l["skills_primary_language"] ?>: <b>C#</b></li>
+                            <li>GUI: <b>MVVM pattern</b></li>
+                            <li>ORM: <b>ADO.NET, Entity Framework Core, LINQ</b></li>
+                        </ul>
+                    </div>
+                    <div class="infoblock">
+                        <header>Web</header>
+                        <ul>
+                            <li><?= $l["skills_base"] ?>: <b>HTML5, CSS3, JS</b></li>
+                            <li><?= $l["skills_experience"] ?> <b>React</b></li>
+                            <li><?= $l["skills_server"] ?>: <b><a href="https://nginx.org" target="_blank">nginx</a>, <a href="https://caddyserver.com" target="_blank">Caddy</a></b></li>
+                            <li><?= $l["skills_web_light"] ?>: <b>PHP</b></li>
+                            <li><?= $l["skills_on_else"] ?>: <b>ASP.NET 8+ (API, MVC, Razor pages)</b></li>
+                        </ul>
+                    </div>
+                    <div class="infoblock">
+                        <header><?= $l["skills_db"] ?></header>
+                        <ul>
+                            <li><?= $l["skills_primary"] ?>: <b>MySQL</b></li>
+                            <li><?= $l["skills_experience"] ?> <b>PostgreSQL &amp; SQL Server</b></li>
+                            <li><?= $l["skills_small_projects"] ?>: <b>SQLite</b></li>
+                        </ul>
+                    </div>
+                    <div class="infoblock">
+                        <header><?= $l["skills_it"] ?></header>
+                        <ul>
+                            <li><b>Git &amp; CI/CD</b> <span title="<?= $l["skills_ci"] ?>">ℹ️</span></li>
+                            <li><?= $l["skills_scripts"] ?> <b>PowerShell, VBA, Bash</b></li>
+                            <li><b>IT helpdesk</b> <span title="<?= $l["skills_helpdesk"] ?>">ℹ️</span></li>
+                            <li><?= $l["skills_1c"] ?></li>
+                            <li><?= $l["skills_icons"] ?></li>
+                        </ul>
+                    </div>
+                </div>
 
                 <h2>👨🏻 <?= $l["about_extra"] ?></h2>
                 <p><b>Languages</b>: Azerbaijani (native), Russian (excellent), English (B1).</p>

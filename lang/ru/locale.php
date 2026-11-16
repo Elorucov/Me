@@ -20,7 +20,23 @@ return [
     "knowledge_crossplatform_ui" => "Кросс-платформенные программы",
     "knowledge_crossplatform_ui_notice" => "Только для десктопных ОС",
     "knowledge_tools" => "Инструменты, утилиты и боты",
-    "knowledge_web" => "Web-страницы, сервисы и API"
+    "knowledge_web" => "Web-страницы, сервисы и API",
+
+    "skills_primary" => "Основной",
+    "skills_primary_language" => "Основной язык",
+    "skills_base" => "Основы",
+    "skills_experience" => "Есть немного опыта с",
+    "skills_server" => "Веб-сервер",
+    "skills_web_light" => "Для лёгковсеных сайтов",
+    "skills_on_else" => "Для остального",
+    "skills_db" => "Базы данных",
+    "skills_small_projects" => "Для маленьких проектов",
+    "skills_it" => "Другие навыки, связанные с IT",
+    "skills_ci" => "Автоматическая сборка приложения для разных платформ после push.",
+    "skills_scripts" => "Пишу скрипты на",
+    "skills_helpdesk" => "Установка и настройка различных ОС и программ, решение их проблем.",
+    "skills_1c" => "Программирование на <b>1С:Предприятии</b>",
+    "skills_icons" => "Создание простых <b>SVG-иконок и лого</b>"
 ];
 
 ?>

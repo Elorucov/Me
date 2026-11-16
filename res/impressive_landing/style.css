@@ -54,7 +54,7 @@
     --content_item_spacing: 16px;
     --person_picture_size: 232px;
     --knowledge_card_icon_size: 36px;
-    --knowledge_card_icon_plate_offset_top: 6px;
+    --infoblock_header_plate_width: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -491,6 +491,16 @@ content p.asParagraph {
     margin-left: calc(var(--content_item_spacing) / 2);
 }
 
+.masonryGrid {
+  column-count: 2;
+  column-gap: 16px;
+}
+
+.masonryGrid > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
 a.card,
 a.card content {
     text-decoration: none;
@@ -605,6 +615,46 @@ a.chip:hover {
 
 .chip:not(:last-child) {
     margin-right: 6px;
+}
+
+.infoblock {
+    background: var(--on_page_background);
+    display: flex;
+    flex-direction: column;
+}
+
+.infoblock header {
+    background: var(--accent);
+    color: #fff;
+    display: inline-block;
+    font-family: unset;
+    padding: 2px 12px;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: 6px;
+    margin-bottom: -6px;
+    margin-left: calc(var(--infoblock_header_plate_width) * -1);
+    position: relative;
+}
+
+.infoblock header:after {
+    content: '';
+    position: absolute;
+    bottom: calc(var(--infoblock_header_plate_width) * -1);
+    left: 0;
+    width: var(--infoblock_header_plate_width);
+    height: var(--infoblock_header_plate_width);
+    background: linear-gradient(45deg, transparent, transparent 50%, var(--accent) 50%, var(--accent));
+    filter: brightness(0.7);
+}
+
+.infoblock p, .infoblock content, .infoblock ul {
+    padding: 12px;
+    margin-bottom: 0px;
+}
+
+.infoblock ul > li::marker {
+    content: '';
 }
 
 .knowledgeCard {
@@ -830,6 +880,10 @@ body:not(.light) {
         flex-basis: 100%;
         margin-left: 0px !important;
         margin-right: 0px !important;
+    }
+
+    .masonryGrid {
+      column-count: 1;
     }
 }
 
