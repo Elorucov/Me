@@ -680,7 +680,7 @@ a.chip:hover {
 
 .knowledgeCard > section.cardContent > header {
     padding: 0px;
-    line-height: 1em;
+    /* line-height: 1em; */
     font-family: inherit;
     font-weight: 600;
     background: unset;
