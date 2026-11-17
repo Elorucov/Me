@@ -36,7 +36,12 @@ return [
     "skills_scripts" => "Writing scripts on",
     "skills_helpdesk" => "Install and setup various OS and software, solving its problems",
     "skills_1c" => "Programming in <b>1C:Enterprise</b>",
-    "skills_icons" => "Making simple <b>SVG icons and logos</b>"
+    "skills_icons" => "Making simple <b>SVG icons and logos</b>",
+
+    "personal_languages" => "Languages: <u>Azerbaijani</u> (native), <u>russian</u> (excellent), <u>english</u> (B1).",
+    "personal_p1" => "I quickly learn and become proficient in technologies, programming languages, and frameworks I haven't worked with before.",
+    "personal_p2" => "I strive to write <b>fast, responsive, and lightweight</b> software: in particular, I try to minimize the use of third-party libraries whenever possible.",
+    "personal_p3" => "When working on my projects, I do not use AI directly in the process of writing code. In other words, I use AI to learn about various design approaches, implementation methods, or ways to solve problems, and then I personally select the best option."
 ];
 
 ?>

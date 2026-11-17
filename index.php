@@ -348,8 +348,7 @@ $posts = array_reverse($posts);
                 </div>
                 <h1><?= $l["name"] ?></h1>
                 <p class="asParagraph">ELOR / Elorucov</p>
-                <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?></p>
-                <p>&nbsp;</p>
+                <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?><br><?= $l["personal_languages"] ?></p>
 
                 <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
@@ -471,10 +470,9 @@ $posts = array_reverse($posts);
                 </div>
 
                 <h2>👨🏻 <?= $l["about_extra"] ?></h2>
-                <p><b>Languages</b>: Azerbaijani (native), Russian (excellent), English (B1).</p>
-                <p>I quickly learn and become proficient in technologies, programming languages, and frameworks I haven't worked with before.</p>
-                <p>I strive to write <b>fast, responsive, and lightweight</b> software: in particular, I try to minimize the use of third-party libraries whenever possible.</p>
-                <p>I rarely use artificial intelligence, and I have never used it when developing my projects.</p>
+                <p><?= $l["personal_p1"] ?></p>
+                <p><?= $l["personal_p2"] ?></p>
+                <p><?= $l["personal_p3"] ?></p>
             </content>
 
             <content id="projectsTab">
