@@ -4,14 +4,17 @@ return [
     "name" => "Elçin Orucov",
     "page_desc" => "Proqram tərtibatçısı",
 
+    // Tabs
     "about" => "Haqqımda",
     "portfolio" => "Portfolio",
     "contacts" => "Əlaqələr",
     "more" => "Əlavə",
 
+    // About tab
     "p_age" => ["", "", ""],
     "about_start" => "<b>{age} yaş</b>, Bakı, Azərbaycan.<br><b>10 ildən çox</b> təcrübəsi olan proqram təminatı tərtibatçısı.",
 
+    // Heading in about
     "knowledge_title" => "Nə hazırlayıram",
     "skills" => "Nə bacarıram",
     "about_extra" => "Haqqımda əlavə bir məlumat",
@@ -41,7 +44,12 @@ return [
     "personal_languages" => "Dillər: <u>Azərbaycanca</u> (doğma), <u>rusça</u> (əla), <u>ingilis</u> (B1).",
     "personal_p1" => "Əvvəllər işləmədiyim texnologiyalar, proqramlaşdırma dilləri və framework-ları tez bir zamanda öyrənirəm.",
     "personal_p2" => "<b>Sürətli, responsive və yüngül proqram təminatları</b> hazırlamağa çalışıram. Üçüncü tərəf library-lərdən mümkün qədər az istifadə etməyə çalışıram.",
-    "personal_p3" => "Layihələrim üzərində işləyərkən, kod yazma prosesində süni intellektdən birbaşa istifadə etmirəm. Başqa sözlə, süni intellektdən müxtəlif dizayn yanaşmaları, tətbiq üsulları və ya problem həlli yolları haqqında məlumat əldə etmək üçün yararlanıram, daha sonra isə ən yaxşı variantı şəxsən özüm seçirəm."
+    "personal_p3" => "Layihələrim üzərində işləyərkən, kod yazma prosesində süni intellektdən birbaşa istifadə etmirəm. Başqa sözlə, süni intellektdən müxtəlif dizayn yanaşmaları, tətbiq üsulları və ya problem həlli yolları haqqında məlumat əldə etmək üçün yararlanıram, daha sonra isə ən yaxşı variantı şəxsən özüm seçirəm.",
+
+    // Portfolio tab
+    "portfolio_desc_1" => "Aşağıda mənim hazırladığım tətbiqlər, alətlər, library-lər və xidmətlər qeyd olunub. Bütün layihələrimlə tanış olmaq üçün ",
+    "portfolio_desc_2" => "GitHub profilimə",
+    "portfolio_desc_3" => " daxil olun.",
 ];
 
 ?>

@@ -2,7 +2,7 @@
 
 <?php
 
-require_once 'inc/i18n.php';
+require_once 'elorexpressive/inc/i18n.php';
 
 /** .png fallback for a .webp logo images */
 function pngFallback(string $url): string
@@ -48,7 +48,7 @@ $age =
 // techStack: list of HTML strings, optional
 // ---------------------------------------------------------------------------
 
-$logoBase = "res/impressive_landing/logos/";
+$logoBase = "elorexpressive/res/logos/";
 
 $projects = [
     [
@@ -278,7 +278,7 @@ function renderContacts(array $list): void
         <a href="<?= e($c["link"]) ?>" class="card"<?= !empty($c["color"]) ? ' style="--accent:' . e($c["color"]) . '"' : "" ?>>
             <aside>
                 <svg>
-                    <use href="res/impressive_landing/icons.svg#<?= e($c["logo"]) ?>"></use>
+                    <use href="elorexpressive/res/icons.svg#<?= e($c["logo"]) ?>"></use>
                 </svg>
             </aside>
             <section class="cardContent">
@@ -315,13 +315,13 @@ $posts = array_reverse($posts);
         <meta property="og:description" value="<?= $l["page_desc"] ?>" />
         <meta property="og:url" value="<?= $currentUrl; ?>" />
         <meta property="og:title" value="ELOR | <?= $l["name"] ?>" />
-        <meta property="og:image" value="<?= $currentUrl; ?>res/impressive_landing/elor_232_2x.jpg" />
+        <meta property="og:image" value="<?= $currentUrl; ?>elorexpressive/res/elor_232_2x.jpg" />
         <meta property="og:image:alt" value="Elchin itself" />
         <meta property="og:image:width" value="464" />
         <meta property="og:image:height" value="464" />
 
         <!-- resources -->
-        <link rel="stylesheet" type="text/css" href="res/impressive_landing/style.css"/>
+        <link rel="stylesheet" type="text/css" href="elorexpressive/res/style.css"/>
     </head>
     <body>
         <main>
@@ -340,9 +340,9 @@ $posts = array_reverse($posts);
             <content id="aboutTab">
                 <div id="personPictureFrame">
                     <picture>
-                        <source srcset="res/impressive_landing/elor_232.webp, res/impressive_landing/elor_232_2x.webp 2x" type="image/webp">
-                        <source srcset="res/impressive_landing/elor_232.jpg, res/impressive_landing/elor_232_2x.jpg 2x" type="image/jpeg">
-                        <img fetchpriority="high" alt="Elchin itself" src="res/impressive_landing/elor_232_2x.jpg">
+                        <source srcset="elorexpressive/res/elor_232.webp, elorexpressive/res/elor_232_2x.webp 2x" type="image/webp">
+                        <source srcset="elorexpressive/res/elor_232.jpg, elorexpressive/res/elor_232_2x.jpg 2x" type="image/jpeg">
+                        <img fetchpriority="high" alt="Elchin itself" src="elorexpressive/res/elor_232_2x.jpg">
                     </picture>
                     <left-handler></left-handler>
                 </div>
@@ -356,7 +356,7 @@ $posts = array_reverse($posts);
                     <div class="card knowledgeCard" style="--accent:#0078d7">
                         <aside>
                             <svg>
-                                <use href="res/impressive_landing/icons.svg#mswindows36"></use>
+                                <use href="elorexpressive/res/icons.svg#mswindows36"></use>
                             </svg>
                         </aside>
                         <section class="cardContent">
@@ -376,7 +376,7 @@ $posts = array_reverse($posts);
                     <div class="card knowledgeCard" style="--accent:#00aa66">
                         <aside>
                             <svg>
-                                <use href="res/impressive_landing/icons.svg#window36"></use>
+                                <use href="elorexpressive/res/icons.svg#window36"></use>
                             </svg>
                         </aside>
                         <section class="cardContent">
@@ -393,7 +393,7 @@ $posts = array_reverse($posts);
                     <div class="card knowledgeCard" style="--accent:#7e7e7e">
                         <aside>
                             <svg>
-                                <use href="res/impressive_landing/icons.svg#console36"></use>
+                                <use href="elorexpressive/res/icons.svg#console36"></use>
                             </svg>
                         </aside>
                         <section class="cardContent">
@@ -410,7 +410,7 @@ $posts = array_reverse($posts);
                     <div class="card knowledgeCard" style="--accent:var(--color1);">
                         <aside>
                             <svg>
-                                <use href="res/impressive_landing/icons.svg#globe36"></use>
+                                <use href="elorexpressive/res/icons.svg#globe36"></use>
                             </svg>
                         </aside>
                         <section class="cardContent">
@@ -477,14 +477,14 @@ $posts = array_reverse($posts);
 
             <content id="projectsTab">
                 <h1>💼 <?= $l["portfolio"] ?></h1>
-                <p>Below are apps, tools, libraries and services that I developed. Visit to <a href="https://github.com/Elorucov" target="_blank">my Github profile</a> to see all my projects.</p>
+                <p><?= $l["portfolio_desc_1"] ?><a href="https://github.com/Elorucov" target="_blank"><?= $l["portfolio_desc_2"] ?></a><?= $l["portfolio_desc_3"] ?></p>
                 <div class="adaptiveGrid">
                     <?php foreach ($projects as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
                         <div class="card" style="--accent:<?= e($p["color"]) ?>">
                             <?php if (isset($logo["icon"])): ?>
                                 <aside>
                                     <svg>
-                                        <use href="res/impressive_landing/icons.svg#<?= e($logo["icon"]) ?>"></use>
+                                        <use href="elorexpressive/res/icons.svg#<?= e($logo["icon"]) ?>"></use>
                                     </svg>
                                 </aside>
                             <?php elseif (isset($logo["light"], $logo["dark"])): ?>
@@ -603,7 +603,7 @@ $posts = array_reverse($posts);
                 </div>
                 <branding>
                     <svg>
-                        <use href="res/impressive_landing/icons.svg#brand"></use>
+                        <use href="elorexpressive/res/icons.svg#brand"></use>
                     </svg>
                 </branding>
             </content>
