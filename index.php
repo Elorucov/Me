@@ -41,6 +41,13 @@ $age =
 $logoBase = "elorexpressive/res/logos/";
 
 $projects = localizeList(require 'elorexpressive/data/projects.php', $lang, 'projects.php');
+$projectsMetaLoc = [
+    "app" => $l["app"],
+    "desktop" => $l["desktop"],
+    "tool" => $l["tool"],
+    "site" => $l["site"],
+    "lib" => $l["lib"]
+];
 
 // ---------------------------------------------------------------------------
 // Contacts
@@ -351,7 +358,7 @@ $posts = array_reverse($posts);
                             <section class="cardContent">
                                 <header><?= e($p["name"]) ?></header>
                                 <content>
-                                    <aside class="meta"><?= e(implode(" · ", $p["meta"])) ?></aside>
+                                    <aside class="meta"><?= t(e(implode(" · ", $p["meta"])), $projectsMetaLoc) ?></aside>
                                     <?= e($p["description"]) ?><br>
                                     <?php $n = 0; foreach ($p["links"] as $key => $url): ?><?= $n++ ? " · " : "" ?><a href="<?= e($url) ?>"><?= e($p["linkLoc"][$key] ?? $key) ?></a><?php endforeach; ?>
                                     <?php if (!empty($p["techStack"])): ?><?= $n ? " · " : "" ?>

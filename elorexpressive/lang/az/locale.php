@@ -50,7 +50,12 @@ return [
     "portfolio_desc_1" => "Aşağıda mənim hazırladığım tətbiqlər, alətlər, library-lər və xidmətlər qeyd olunub. Bütün layihələrimlə tanış olmaq üçün ",
     "portfolio_desc_2" => "GitHub profilimə",
     "portfolio_desc_3" => " daxil olun.",
-    "tech_stack" => "Tech stack"
+    "tech_stack" => "Tech stack",
+    "app" => "Tətbiq",
+    "desktop" => "PC",
+    "tool" => "Alət",
+    "site" => "Sayt",
+    "lib" => "Library"
 ];
 
 ?>

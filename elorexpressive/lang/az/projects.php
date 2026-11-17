@@ -4,8 +4,8 @@ return [
     "laney" => [
         "description" => "A messenger for VK social network for Windows. Reached 10 000 users.",
         "linkLoc" => [
-            "download" => "Download",
-            "source" => "Source code"
+            "download" => "Yüklə",
+            "source" => "Mənbə kodu"
         ],
         "techStack" => [
             "<b>MVVM</b> pattern (partially);",
@@ -18,7 +18,7 @@ return [
     "laney2" => [
         "description" => "A cross-platform version of Laney for Windows, macOS and Linux.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ],
         "techStack" => [
             "<b>MVVM</b> pattern;",
@@ -33,39 +33,39 @@ return [
     "widgetshot" => [
         "description" => "A tool for checking Windows 11 widgets and taking screenshots of them.",
         "linkLoc" => [
-            "download" => "Download from Store",
-            "source" => "Source code"
+            "download" => "MS Store-dən yüklə",
+            "source" => "Mənbə kodu"
         ]
     ],
     "purpleblog" => [
         "description" => "A CLI tool for converting Markdown files to HTML pages with template.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ],
     "pvks" => [
         "description" => "A utility for pasting text from the clipboard by simulating physical key presses.",
         "linkLoc" => [
-            "download" => "Download from GitHub",
-            "source" => "Source code"
+            "download" => "GitHub-dan yüklə",
+            "source" => "Mənbə kodu"
         ]
     ],
     "vkui_tokens_gen" => [
         "description" => "A CLI tool that converts colors, sizes and font metrics from vkui-tokens into Avalonia's XAML resource.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ],
     "emoji_list_gen" => [
         "description" => "A CLI tool for generating emoji list.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ],
     "mrbt" => [
         "description" => "An API service created for demonstration and educational purposes.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ],
         "techStack" => [
             "<b>N-Layer</b> architecture &amp; <b>S.O.L.I.D.</b> principles;",
@@ -79,20 +79,20 @@ return [
         "description" => "A web project that demonstrates useful features for SSR-based web sites.",
         "linkLoc" => [
             "download" => "Demo",
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ],
     "pl" => [
         "description" => "Yet another lightweight library for saving preferences and settings into a file.",
         "linkLoc" => [
             "download" => "Nuget",
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ],
     "vkui_avalonia" => [
         "description" => "VKUI design implementation for Avalonia.",
         "linkLoc" => [
-            "source" => "Source code"
+            "source" => "Mənbə kodu"
         ]
     ]
 ];

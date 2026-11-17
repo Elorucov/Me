@@ -31,7 +31,7 @@ return [
         ]
     ],
     "widgetshot" => [
-        "description" => "A tool for checking Windows 11 widgets and taking screenshots of them.",
+        "description" => "A tool for developing and checking Windows 11 widgets and taking screenshots of them.",
         "linkLoc" => [
             "download" => "Download from Store",
             "source" => "Source code"
@@ -72,7 +72,7 @@ return [
             "<b>Repository &amp; Unit-of-Work</b> pattern;",
             '<a href="https://automapper.io/" target="_blank">Automapper</a>;',
             '<a href="https://fluentvalidation.net/" target="_blank">FluentValidation</a>;',
-            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging;'
+            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging.'
         ]
     ],
     "lwui" => [
