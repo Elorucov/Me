@@ -411,6 +411,12 @@ content li {
     line-height: 1.5em;
 }
 
+content p > svg {
+    height: 1em;
+    vertical-align: middle;
+    max-width: 2em; /* костыль */
+}
+
 content h1 {
     font-size: 2em;
     padding-bottom: 0.3em;
