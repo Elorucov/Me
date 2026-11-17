@@ -50,6 +50,7 @@ return [
     "portfolio_desc_1" => "Below are apps, tools, libraries and services that I developed. Visit to ",
     "portfolio_desc_2" => "my Github profile",
     "portfolio_desc_3" => " to see all my projects.",
+    "tech_stack" => "Tech stack"
 ];
 
 ?>

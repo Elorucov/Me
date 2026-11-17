@@ -71,6 +71,18 @@ function loadLangFile(string $lang, string $file): mixed
     return is_file($path) ? require $path : null;
 }
 
+function localizeList(array $base, string $lang, string $file): array
+{
+    $en = loadLangFile('en', $file) ?? [];
+    $tr = $lang === 'en' ? [] : (loadLangFile($lang, $file) ?? []);
+
+    foreach ($base as $id => &$item) {
+        $item = array_replace($item, $en[$id] ?? [], $tr[$id] ?? []);
+        $item["linkLoc"] = array_replace($en[$id]["linkLoc"] ?? [], $tr[$id]["linkLoc"] ?? []);
+    }
+    return $base;
+}
+
 // Russian-specific thing.
 /**
  * Склонение существительных после числительных.

@@ -36,163 +36,11 @@ $age =
         ? date("Y") - $birthDate[2] - 1
         : date("Y") - $birthDate[2];
 
-// ---------------------------------------------------------------------------
-// Projects
-//
-// logo is one of:
-//   ["light" => url, "dark" => url]  - two logos for light/dark themes
-//   ["src" => url]                   - a single logo
-//   ["icon" => "name"]               - icon from icons.svg
-//
-// links: "url" => "link text"
-// techStack: list of HTML strings, optional
-// ---------------------------------------------------------------------------
+
 
 $logoBase = "elorexpressive/res/logos/";
 
-$projects = [
-    [
-        "name" => "Laney",
-        "color" => "#0070C0",
-        "meta" => ["UWP", ".NET", "App", "2018-2025"],
-        "logo" => [
-            "light" => $logoBase . "laney1_light.webp",
-            "dark" => $logoBase . "laney1_dark.webp",
-        ],
-        "description" => "A messenger for VK social network for Windows. Reached 10 000 users.",
-        "links" => [
-            "https://elor.top/laney" => "Download",
-            "https://github.com/Elorucov/Laney-Legacy" => "Source code",
-        ],
-        "techStack" => [
-            "<b>MVVM</b> pattern (partially);",
-            '<a href="https://learn.microsoft.com/en-us/windows/apps/develop/win2d/" target="_blank">Win2D</a> and Windows Composition API for rendering chat background and some animations;',
-            '<a href="https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/wns-overview" target="_blank">WNS</a> push notifications;',
-            '<a href="https://www.newtonsoft.com/json" target="_blank">Newtonsoft.Json</a> for working with JSON (VK API, themes and emoji list);',
-            '<a href="https://github.com/Shane32/QRCoder" target="_blank">QRCoder</a> for generating QR-code for auth.',
-        ],
-    ],
-    [
-        "name" => "Laney 2",
-        "color" => "#BE75E0",
-        "meta" => ["Desktop", ".NET", "App", "2022"],
-        "logo" => ["src" => $logoBase . "laney2.webp"],
-        "description" => "A cross-platform version of Laney for Windows, macOS and Linux.",
-        "links" => [
-            "https://github.com/Elorucov/Laney-Avalonia" => "Source code",
-        ],
-        "techStack" => [
-            "<b>MVVM</b> pattern;",
-            '<a href="https://avaloniaui.net" target="_blank">Avalonia</a> — a cross-platform UI framework;',
-            '<a href="https://code.videolan.org/videolan/LibVLCSharp" target="_blank">LibVLCSharp</a> for audio;',
-            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging;',
-            '<a href="https://www.newtonsoft.com/json" target="_blank">System.Text.Json</a> — a build-in .NET API for working with JSON (VK API);',
-            '<a href="https://github.com/oleg-st/ZstdSharp" target="_blank">ZstdSharp</a> for receiving response from API more efficient;',
-            '<a href="https://github.com/Elorucov/VKUI.Avalonia" target="_blank">VKUI.Avalonia</a> — a self-written library of UI components to make the app UI similar to the official app.',
-        ],
-    ],
-    [
-        "name" => "WidgetShot",
-        "color" => "#34E45F",
-        "meta" => ["UWP", ".NET", "App", "2025"],
-        "logo" => ["src" => $logoBase . "widgetshot.webp"],
-        "description" => "A tool for checking Windows 11 widgets and taking screenshots of them.",
-        "links" => [
-            "https://apps.microsoft.com/detail/9nr39qhpqr8w" => "Download from Store",
-            "https://github.com/Elorucov/WidgetShot" => "Source code",
-        ],
-    ],
-    [
-        "name" => "PurpleBlog",
-        "color" => "#800080",
-        "meta" => ["Desktop", ".NET", "Tool", "2026"],
-        "logo" => ["src" => $logoBase . "purpleblog.webp"],
-        "description" => "A CLI tool for converting Markdown files to HTML pages with template.",
-        "links" => [
-            "https://github.com/Elorucov/PurpleBlog" => "Source code",
-        ],
-    ],
-    [
-        "name" => "PasteViaKeySimulation",
-        "color" => "#4C939E",
-        "meta" => ["Windows", ".NET", "Tool", "2026"],
-        "logo" => ["icon" => "console48"],
-        "description" => "A utility for pasting text from the clipboard by simulating physical key presses.",
-        "links" => [
-            "https://github.com/Elorucov/PasteViaKeySimulation/releases" => "Download from GitHub",
-            "https://github.com/Elorucov/PasteViaKeySimulation" => "Source code",
-        ],
-    ],
-    [
-        "name" => "VKUI Tokens to Avalonia XAML",
-        "color" => "#0077ff",
-        "meta" => ["Desktop", ".NET", "Tool", "2026"],
-        "logo" => ["icon" => "console48"],
-        "description" => "A CLI tool that converts colors, sizes and font metrics from vkui-tokens into Avalonia's XAML resource.",
-        "links" => [
-            "https://github.com/Elorucov/VKUI-Tokens-To-Avalonia-XAML" => "Source code",
-        ],
-    ],
-    [
-        "name" => "Emoji list creator",
-        "color" => "#00cc55",
-        "meta" => ["Desktop", ".NET", "Tool", "2022"],
-        "logo" => ["icon" => "console48"],
-        "description" => "A CLI tool for generating emoji list.",
-        "links" => [
-            "https://github.com/Elorucov/EmojiListCreatorTool" => "Source code",
-        ],
-    ],
-    [
-        "name" => "MatrixBugtracker",
-        "color" => "#049735",
-        "meta" => ["Web", ".NET", "API", "2025"],
-        "logo" => ["icon" => "globe48"],
-        "description" => "An API service created for demonstration and educational purposes.",
-        "links" => [
-            "https://github.com/Elorucov/MatrixBugtracker" => "Source code",
-        ],
-        "techStack" => [
-            "<b>N-Layer</b> architecture &amp; <b>S.O.L.I.D.</b> principles;",
-            "<b>Repository &amp; Unit-of-Work</b> pattern;",
-            '<a href="https://automapper.io/" target="_blank">Automapper</a>;',
-            '<a href="https://fluentvalidation.net/" target="_blank">FluentValidation</a>;',
-            '<a href="https://serilog.net/" target="_blank">Serilog</a> for logging;',
-        ],
-    ],
-    [
-        "name" => "“LWUI”",
-        "color" => "#447BBA",
-        "meta" => ["Web", ".NET", "Site", "2025"],
-        "logo" => ["icon" => "globe48"],
-        "description" => "A web project that demonstrates useful features for SSR-based web sites.",
-        "links" => [
-            "https://elor.top/demos/lwui" => "Demo",
-            "https://github.com/Elorucov/ASPNET-LightweightWebUIBoilerplate" => "Source code",
-        ],
-    ],
-    [
-        "name" => "PrefsLite",
-        "color" => "#7f7f7f",
-        "meta" => ["Library", ".NET", "2023"],
-        "logo" => ["icon" => "library48"],
-        "description" => "Yet another lightweight library for saving preferences and settings into a file.",
-        "links" => [
-            "https://www.nuget.org/packages/ELOR.PrefsLite/" => "Nuget",
-            "https://github.com/Elorucov/PrefsLite" => "Source code",
-        ],
-    ],
-    [
-        "name" => "VKUI.Avalonia",
-        "color" => "#0077ff",
-        "meta" => ["Library", ".NET", "Avalonia", "2022"],
-        "logo" => ["icon" => "library48"],
-        "description" => "VKUI design implementation for Avalonia.",
-        "links" => [
-            "https://github.com/Elorucov/VKUI.Avalonia" => "Source code",
-        ],
-    ],
-];
+$projects = localizeList(require 'elorexpressive/data/projects.php', $lang, 'projects.php');
 
 // ---------------------------------------------------------------------------
 // Contacts
@@ -505,10 +353,10 @@ $posts = array_reverse($posts);
                                 <content>
                                     <aside class="meta"><?= e(implode(" · ", $p["meta"])) ?></aside>
                                     <?= e($p["description"]) ?><br>
-                                    <?php $n = 0; foreach ($p["links"] as $url => $text): ?><?= $n++ ? " · " : "" ?><a target="_blank" href="<?= e($url) ?>"><?= e($text) ?></a><?php endforeach; ?>
+                                    <?php $n = 0; foreach ($p["links"] as $key => $url): ?><?= $n++ ? " · " : "" ?><a href="<?= e($url) ?>"><?= e($p["linkLoc"][$key] ?? $key) ?></a><?php endforeach; ?>
                                     <?php if (!empty($p["techStack"])): ?><?= $n ? " · " : "" ?>
                                     <input type="checkbox" class="dlg" id="<?= $techId ?>">
-                                    <label for="<?= $techId ?>">Tech stack</label>
+                                    <label for="<?= $techId ?>"><?= $l["tech_stack"] ?></label>
                                         <div class="dlg_wrap">
                                             <label class="dlg_closer" for="<?= $techId ?>"></label>
                                             <div class="dlg_content">
