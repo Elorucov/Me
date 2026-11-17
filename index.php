@@ -203,7 +203,9 @@ $posts = array_reverse($posts);
                 </div>
                 <h1><?= $l["name"] ?></h1>
                 <p class="asParagraph">ELOR / Elorucov</p>
-                <p><?= t($l["about_start"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?><br><?= $l["personal_languages"] ?></p>
+                <p><?= t($l["about_start_1"], ["age" => $age, "p_age" => pluralForm($age, $l["p_age"])]) ?></p>
+                <p><?= $l["about_start_2"] ?></p>
+                <p><?= $l["personal_languages"] ?></p>
 
                 <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 

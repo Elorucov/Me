@@ -12,7 +12,8 @@ return [
 
     // About tab
     "p_age" => ["", "", ""],
-    "about_start" => "<b>{age} yaş</b>, Bakı, Azərbaycan.<br><b>10 ildən çox</b> təcrübəsi olan proqram təminatı tərtibatçısı.",
+    "about_start_1" => "<b>{age} yaş</b>, Bakı, Azərbaycan.",
+    "about_start_2" => "<b>10 ildən çox</b> təcrübəsi olan proqram təminatı tərtibatçısı.",
 
     // Heading in about
     "knowledge_title" => "Nə hazırlayıram",

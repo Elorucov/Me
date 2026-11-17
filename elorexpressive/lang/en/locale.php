@@ -12,7 +12,8 @@ return [
 
     // About tab
     "p_age" => ["", "", ""],
-    "about_start" => "<b>{age} y. o.</b>, Baku, Azerbaijan.<br>Software developer with <b>10+ years</b> of experience.",
+    "about_start_1" => "<b>{age} y. o.</b>, Baku, Azerbaijan.",
+    "about_start_2" => "Software developer with <b>10+ years</b> of experience.",
 
     // Heading in about
     "knowledge_title" => "What I am developing",
