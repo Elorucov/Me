@@ -49,102 +49,7 @@ $projectsMetaLoc = [
     "lib" => $l["lib"]
 ];
 
-// ---------------------------------------------------------------------------
-// Contacts
-// ---------------------------------------------------------------------------
-$contacts = [
-    [
-        "name" => "Telegram",
-        "link" => "https://telegram.me/elorucov",
-        "color" => "#179CDE",
-        "logo" => "telegram",
-        "description" => "The main way to contact me",
-    ],
-    [
-        "name" => "Github",
-        "link" => "https://github.com/Elorucov",
-        "logo" => "github",
-        "description" => "Explore source code of my projects",
-    ],
-    [
-        "name" => "LinkedIn",
-        "link" => "https://linkedin.com/in/Elorucov",
-        "color" => "#0A66C2",
-        "logo" => "linkedin",
-        "description" => "For employers and HR",
-    ],
-    [
-        "name" => "VKontakte",
-        "link" => "https://vk.com/elorucov",
-        "color" => "#0077FF",
-        "logo" => "vk",
-        "description" => "For Russian speakers",
-    ],
-    [
-        "name" => "Instagram",
-        "link" => "https://instagram.com/elorucov",
-        "color" => "#ff5c00",
-        "logo" => "instagram",
-        "description" => "<i>Nothing interesting there. Yet.</i>",
-    ],
-    [
-        "name" => "E-mail",
-        "link" => "mailto:elorucov@live.ru",
-        "logo" => "mail",
-        "description" => "<code>elorucov@live.ru</code>",
-    ],
-];
-
-$contactsMore = [
-    [
-        "name" => "Discord",
-        "link" => "https://discordapp.com/users/565614369334099976",
-        "color" => "#5865F2",
-        "logo" => "discord",
-        "description" => "",
-    ],
-    [
-        "name" => "Twitter",
-        "link" => "https://twitter.com/elorucov_az",
-        "color" => "#1d9bf0",
-        "logo" => "twitter",
-        "description" => "Yes, Twitter, not 𝕏",
-    ],
-    [
-        "name" => "Mastodon",
-        "link" => "https://dotnet.social/@elor",
-        "color" => "#5B49DE",
-        "logo" => "mastodon",
-        "description" => "International: elor@dotnet.social",
-    ],
-    [
-        "name" => "Smithereen",
-        "link" => "https://friends.grishka.me/oru",
-        "color" => "#4C6E00",
-        "logo" => "smithereen",
-        "description" => "Russian: oru@friends.grishka.me",
-    ],
-];
-
-/** Renders a list of contact cards */
-function renderContacts(array $list): void
-{
-    foreach ($list as $c): ?>
-        <a href="<?= e($c["link"]) ?>" class="card"<?= !empty($c["color"]) ? ' style="--accent:' . e($c["color"]) . '"' : "" ?>>
-            <aside>
-                <svg>
-                    <use href="elorexpressive/res/icons.svg#<?= e($c["logo"]) ?>"></use>
-                </svg>
-            </aside>
-            <section class="cardContent">
-                <header><?= e($c["name"]) ?></header>
-                <content>
-                    <?= $c["description"] ?>
-                </content>
-            </section>
-        </a>
-    <?php endforeach;
-}
+$contacts = localizeList(require 'elorexpressive/data/contacts.php', $lang, 'contacts.php');
 
 // ---------------------------------------------------------------------------
 // Blog posts
@@ -386,14 +291,23 @@ $posts = array_reverse($posts);
 
             <content id="contactsTab">
                 <h1>🖊️ <?= $l["contacts"] ?></h1>
-                <p>Here's where you can find me:</p>
+                <p><?= $l["contacts_desc"] ?></p>
                 <div class="adaptiveGrid">
-                    <?php renderContacts($contacts); ?>
-                </div>
-
-                <h2>📝 Also...</h2>
-                <div class="adaptiveGrid">
-                    <?php renderContacts($contactsMore); ?>
+                    <?php foreach ($contacts as $c): ?>
+                        <a href="<?= e($c["link"]) ?>" class="card"<?= !empty($c["color"]) ? ' style="--accent:' . e($c["color"]) . '"' : "" ?>>
+                            <aside>
+                                <svg>
+                                    <use href="elorexpressive/res/icons.svg#<?= e($c["logo"]) ?>"></use>
+                                </svg>
+                            </aside>
+                            <section class="cardContent">
+                                <header><?= e($c["name"]) ?></header>
+                                <content>
+                                    <?= $c["description"] ?>
+                                </content>
+                            </section>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </content>
 

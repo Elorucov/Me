@@ -30,7 +30,7 @@ return [
     "skills_primary_language" => "Əsas dil",
     "skills_base" => "Təməl",
     "skills_experience" => "Müəyyən təcrübəyə malik:",
-    "skills_server" => "Veb-server",
+    "skills_server" => "Veb-serverlər",
     "skills_web_light" => "\"Yüngül\" saytlar üçün",
     "skills_on_else" => "Diqər saytlar üçün",
     "skills_db" => "Verilənlər bazaları",
@@ -56,7 +56,10 @@ return [
     "desktop" => "PC",
     "tool" => "Alət",
     "site" => "Sayt",
-    "lib" => "Library"
+    "lib" => "Library",
+
+    // Contacts tab
+    "contacts_desc" => "Məni burada tapa bilərsiniz:"
 ];
 
 ?>

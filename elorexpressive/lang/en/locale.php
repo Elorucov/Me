@@ -30,7 +30,7 @@ return [
     "skills_primary_language" => "Primary language",
     "skills_base" => "Base",
     "skills_experience" => "Having some experience with",
-    "skills_server" => "Web-server",
+    "skills_server" => "Web-servers",
     "skills_web_light" => "For lightweight web-sites",
     "skills_on_else" => "For everything else",
     "skills_db" => "Databases",
@@ -56,7 +56,10 @@ return [
     "desktop" => "PC",
     "tool" => "Tool",
     "site" => "Site",
-    "lib" => "Library"
+    "lib" => "Library",
+
+    // Contacts tab
+    "contacts_desc" => "Here's where you can find me:"
 ];
 
 ?>
