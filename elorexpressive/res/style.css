@@ -149,19 +149,10 @@ body {
         "Segoe UI Symbol";
     font-optical-sizing: auto;
     font-style: normal;
-    color-scheme: light;
-
-    @media (prefers-color-scheme: dark) {
-        color-scheme: dark;
-    }
 }
 
-body.light {
-    color-scheme: light !important;
-}
-
-body.dark {
-    color-scheme: dark !important;
+code {
+    font-family: var(--mono_font);
 }
 
 h1,
@@ -188,6 +179,19 @@ body {
     height: 100vh;
     background: var(--page_background);
     color: var(--page_foreground);
+    color-scheme: light;
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+}
+
+body.light {
+    color-scheme: light !important;
+}
+
+body.dark {
+    color-scheme: dark !important;
 }
 
 body > main {
