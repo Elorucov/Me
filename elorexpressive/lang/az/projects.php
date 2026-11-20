@@ -1,8 +1,10 @@
 <?php
 
+// Специально не перевёл techStack и описания некоторых проектов на азерб., иначе можно задолбаться.
+
 return [
     "laney" => [
-        "description" => "A messenger for VK social network for Windows. Reached 10 000 users.",
+        "description" => "Windows üçün VK sosial şəbəkəsinin messenceri. 10 000 istifadəçiyə çatıb.",
         "linkLoc" => [
             "download" => "Yüklə",
             "source" => "Mənbə kodu"
@@ -16,7 +18,7 @@ return [
         ],
     ],
     "laney2" => [
-        "description" => "A cross-platform version of Laney for Windows, macOS and Linux.",
+        "description" => "Laney-nin Windows, macOS və Linux üçün kross-platforma versiyası.",
         "linkLoc" => [
             "source" => "Mənbə kodu"
         ],
@@ -31,20 +33,20 @@ return [
         ]
     ],
     "widgetshot" => [
-        "description" => "A tool for checking Windows 11 widgets and taking screenshots of them.",
+        "description" => "Windows 11 vidcetlərini yoxlamaq və onların skrinşotlarını çəkmək üçün alət.",
         "linkLoc" => [
             "download" => "MS Store-dən yüklə",
             "source" => "Mənbə kodu"
         ]
     ],
     "purpleblog" => [
-        "description" => "A CLI tool for converting Markdown files to HTML pages with template.",
+        "description" => "Markdown fayllarını şablonlu HTML səhifələrinə çevirmək üçün CLI aləti.",
         "linkLoc" => [
             "source" => "Mənbə kodu"
         ]
     ],
     "pvks" => [
-        "description" => "A utility for pasting text from the clipboard by simulating physical key presses.",
+        "description" => "Fiziki düymə basmasını simulyasiya etməklə mübadilə buferindən mətn yapışdırmağa imkan verən vasitə.",
         "linkLoc" => [
             "download" => "GitHub-dan yüklə",
             "source" => "Mənbə kodu"
@@ -57,13 +59,13 @@ return [
         ]
     ],
     "emoji_list_gen" => [
-        "description" => "A CLI tool for generating emoji list.",
+        "description" => "Emoji siyahısı yaratmaq üçün CLI aləti.",
         "linkLoc" => [
             "source" => "Mənbə kodu"
         ]
     ],
     "mrbt" => [
-        "description" => "An API service created for demonstration and educational purposes.",
+        "description" => "Nümayiş və təhsil məqsədləri üçün yaradılmış API xidməti.",
         "linkLoc" => [
             "source" => "Mənbə kodu"
         ],
@@ -76,7 +78,7 @@ return [
         ]
     ],
     "lwui" => [
-        "description" => "A web project that demonstrates useful features for SSR-based web sites.",
+        "description" => "SSR əsaslı veb-saytlar üçün faydalı xüsusiyyətləri nümayiş etdirən layihə.",
         "linkLoc" => [
             "download" => "Demo",
             "source" => "Mənbə kodu"

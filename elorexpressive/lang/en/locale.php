@@ -68,7 +68,7 @@ return [
     "more_items" => "More",
     "my_cv" => "My CV",
     "must_read_articles" => "Must read articles",
-    "must_read_articles_desc" => "Links to articles that I consider essential reading for software engineers, UI/UX designers, and other IT professionals",
+    "must_read_articles_desc" => "List of articles that I consider essential reading for software engineers, UI/UX designers, and other IT pros.",
     "nt_somic_desc" => "A font that used in this page and in logos in some my projects. Author"
 ];
 

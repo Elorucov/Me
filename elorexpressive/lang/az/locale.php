@@ -68,7 +68,7 @@ return [
     "more_items" => "Digər",
     "my_cv" => "Mənim CV",
     "must_read_articles" => "Vacib məqalələr",
-    "must_read_articles_desc" => "Links to articles that I consider essential reading for software engineers, UI/UX designers, and other IT professionals",
+    "must_read_articles_desc" => "Proqram mühəndisləri, UI/UX dizaynerləri və digər İT mütəxəssisləri üçün vacib hesab etdiyim məqalələrin siyahı.",
     "nt_somic_desc" => "Bu səhifədə və bəzi layihələrimdəki loqolarda istifadə olunan şrift. Müəllif"
 ];
 
