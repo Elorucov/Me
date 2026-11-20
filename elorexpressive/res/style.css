@@ -8,20 +8,21 @@
 
     /* Light */
     --page_background_l: #f0f0f0;
-    --page_foreground_l: #000;
+    --text_primary_l: #000;
     --on_page_background_l: #fff;
-    --section_separator_color_l: #000;
+    --text_secondary_l: #6d7885;
+
 
     /* Dark */
     --page_background_d: #161616;
-    --page_foreground_d: #fff;
+    --text_primary_d: #fff;
     --on_page_background_d: #222;
-    --section_separator_color_d: #fff;
+    --text_secondary_d: #969a9f;
 
     --page_background: light-dark(var(--page_background_l), var(--page_background_d));
-    --page_foreground: light-dark(var(--page_foreground_l), var(--page_foreground_d));
+    --text_primary: light-dark(var(--text_primary_l), var(--text_primary_d));
     --on_page_background: light-dark(var(--on_page_background_l), var(--on_page_background_d));
-    --section_separator_color: light-dark(var(--section_separator_color_l), var(--section_separator_color_d));
+    --text_secondary: light-dark(var(--text_secondary_l), var(--text_secondary_d));
 }
 
 
@@ -29,16 +30,16 @@
 @supports not (color: light-dark(#fff, #000)) {
     :root {
         --page_background: var(--page_background_l);
-        --page_foreground: var(--page_foreground_l);
+        --text_primary: var(--text_primary_l);
         --on_page_background: var(--on_page_background_l);
-        --section_separator_color: var(--section_separator_color_l);
+        --text_secondary: var(--text_secondary_l);
 
         @media (prefers-color-scheme: dark) {
             /* Fallback for old browsers */
             --page_background: var(--page_background_l);
-            --page_foreground: var(--page_foreground_l);
+            --text_primary: var(--text_primary_l);
             --on_page_background: var(--on_page_background_l);
-            --section_separator_color: var(--section_separator_color_l);
+            --text_secondary: var(--text_secondary_l);
         }
     }
 }
@@ -178,7 +179,7 @@ body {
     width: 100vw;
     height: 100vh;
     background: var(--page_background);
-    color: var(--page_foreground);
+    color: var(--text_primary);
     color-scheme: light;
 
     @media (prefers-color-scheme: dark) {
@@ -503,12 +504,12 @@ content p.asParagraph {
 
 .masonryGrid {
   column-count: 2;
-  column-gap: 16px;
+  column-gap: var(--content_item_spacing);
 }
 
 .masonryGrid > * {
   break-inside: avoid;
-  margin-top: 16px;
+  margin-top: var(--content_item_spacing);
 }
 
 .masonryGrid > *:first-child {
@@ -518,7 +519,7 @@ content p.asParagraph {
 a.card,
 a.card content {
     text-decoration: none;
-    color: var(--page_foreground);
+    color: var(--text_primary);
 }
 
 .card {
@@ -582,7 +583,7 @@ a.card:hover > section.cardContent > header {
 
 .card > section.cardContent > content > .meta {
     font-size: 0.85em;
-    opacity: 0.6;
+    color: var(--text_secondary);
     margin-bottom: 2px;
 }
 
@@ -762,50 +763,25 @@ a.chip:hover {
     margin-bottom: 84px;
 }
 
-#moreTab section {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-    box-sizing: border-box;
+#moreTab .infoblock {
+    margin-top: var(--content_item_spacing);
 }
 
-#moreTab section > header {
-    margin-bottom: 8px;
-}
-
-#moreTab section > header > h2 {
-    margin: 0px;
-    padding-bottom: 9px;
-}
-
-#moreTab section > content {
-    margin-top: 8px;
-}
-
-#moreTab section sup {
-    opacity: 0.6;
-}
-
-#moreTab section pubDate, #moreTab section pubAuthor {
-    margin: 0px;
-    font-size: 12px;
-    opacity: 0.5;
+#moreTab .infoblock li > content {
     display: block;
-}
-
-#moreTab section summary {
     font-size: 0.875em;
     line-height: 1.375;
+    padding: 0px;
 }
 
-#moreTab section a {
-    color: var(--page_foreground);
+#moreTab .infoblock a {
+    color: var(--text_primary);
     font-weight: 600;
 }
 
-#moreTab section p:last-child,
-#moreTab section ul:last-child {
-    margin-bottom: 0px;
+#moreTab .infoblock li > content,
+#moreTab .infoblock li > content > a {
+    color: var(--text_secondary);
 }
 
 branding {
@@ -906,7 +882,8 @@ body:not(.light) {
 }
 
 @media (min-width: 769px) {
-    content .adaptiveGrid > .card:nth-last-of-type(-n+2) {
+    /* Правило адекватно будет работать если кол-во карточек чётное */
+    content #knowledge.adaptiveGrid > .card:nth-last-of-type(-n+2) {
         margin-bottom: 0px;
     }
 }

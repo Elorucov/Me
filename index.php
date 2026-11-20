@@ -114,7 +114,7 @@ $posts = array_reverse($posts);
 
                 <h2>👨🏻‍💻 <?= $l["knowledge_title"] ?></h2>
 
-                <div class="adaptiveGrid">
+                <div id="knowledge" class="adaptiveGrid">
                     <div class="card knowledgeCard" style="--accent:#0078d7">
                         <aside>
                             <svg>
@@ -313,64 +313,57 @@ $posts = array_reverse($posts);
 
             <content id="moreTab">
                 <div class="adaptiveGrid">
-                    <section>
+                    <div class="infoblock">
                         <header>
-                            <h2>📝 Blog</h2>
+                            <?= $l["blog"] ?>
                         </header>
-                        <content>
-                            <ul>
-                                <?php foreach ($posts as $post): $pubDate = strtotime($post["PublishDate"]); ?>
-                                    <li>
-                                        <a target="_blank" href="<?= BLOG_URL . $post["RelativeUrl"] ?>">
-                                            <?= $post["Title"] ?>
-                                        </a>
-                                        <pubdate><?= date("F j Y", $pubDate) ?></pubdate>
-                                        <summary><?= $post["Summary"] ?></summary>
-                                    </li>
-                                <?php endforeach; ?>
-                                <li><a target="_blank" href="<?= BLOG_URL; ?>">More →</a></li>
-                            </ul>
-                        </content>
-                    </section>
+                        <ul>
+                            <?php foreach ($posts as $post): $pubDate = strtotime($post["PublishDate"]); ?>
+                                <li>
+                                    <a target="_blank" href="<?= BLOG_URL . $post["RelativeUrl"] ?>">
+                                        <?= $post["Title"] ?>
+                                    </a>
+                                    <content><?= $post["Summary"] ?></content>
+                                </li>
+                            <?php endforeach; ?>
+                            <li><a target="_blank" href="<?= BLOG_URL; ?>"><?= $l["more_items"] ?> →</a></li>
+                        </ul>
+                    </div>
 
-                    <section>
+                    <div class="infoblock">
                         <header>
-                            <h2>🔗 Links</h2>
+                            <?= $l["links"] ?>
                         </header>
-                        <content>
-                            <ul>
-                                <li>
-                                    <a href="https://elor.top/res/docs/cv_en.pdf">My CV.</a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://elor.top/mustread">Must read articles</a>
-                                    <summary>Links to articles that I consider essential reading for software engineers, UI/UX designers, and other IT professionals</summary>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://github.com/nnttttyyppee/NT-Somic">NT Somic font</a>
-                                    <summary>A font that used in this page and in logos in some my projects. Author: <a target="_blank" href="https://nnttttyyppee.cc/">NT Type</a>.</summary>
-                                </li>
-                            </ul>
-                        </content>
-                    </section>
+                        <ul>
+                            <li>
+                                <a href="https://elor.top/res/docs/cv_en.pdf"><?= $l["my_cv"] ?></a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://elor.top/mustread"><?= $l["must_read_articles"] ?></a>
+                                <content><?= $l["must_read_articles_desc"] ?></content>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://github.com/nnttttyyppee/NT-Somic">NT Somic</a>
+                                <content><?= $l["nt_somic_desc"] ?>: <a target="_blank" href="https://nnttttyyppee.cc/">NT Type</a>.</content>
+                            </li>
+                        </ul>
+                    </div>
 
-                    <section>
+                    <div class="infoblock">
                         <header>
-                            <h2>🤝 People</h2>
+                            <?= $l["people_sites"] ?>
                         </header>
-                        <content>
-                            <ul>
-                                <li>
-                                    <a target="_blank" href="https://sominemo.com">sominemo.com</a>
-                                    <summary>Sergey Dilong (sominemo) — web and Flutter apps developer &amp; artist. Author of logos for Laney and WidgetShot.</summary>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://tonsky.me">tonsky.me</a>
-                                    <summary>Nikita Prokopov (nikitonsky) — software engineer. I'm taking notes on his posts about how <i>not</i> to develop software and make UI.</summary>
-                                </li>
-                            </ul>
-                        </content>
-                    </section>
+                        <ul>
+                            <li>
+                                <a target="_blank" href="https://sominemo.com">sominemo.com</a>
+                                <content><i>Sergey Dilong (sominemo)</i> —  web and Flutter apps developer &amp; artist. Author of logos for Laney and WidgetShot.</content>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://tonsky.me">tonsky.me</a>
+                                <content><i>Nikita Prokopov (nikitonsky)</i> — software engineer. I'm taking notes on his posts about how <i>not</i> to develop software and make UI.</content>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <branding>
                     <svg>
