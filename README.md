@@ -18,6 +18,6 @@ Due to the way the tabs are implemented, the page will only display correctly in
 
 ## TODO:
 
-- [ ] Translations _(in progress...)_;
+- [x] Translations;
 - [x] Skills section redesign (implement a grid like "What I am developing" section);
 - [ ] Large project info block with screenshots on top of the other projects for some most-popular projects.
