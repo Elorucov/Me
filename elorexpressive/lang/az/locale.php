@@ -48,9 +48,8 @@ return [
     "personal_p3" => "Layihələrim üzərində işləyərkən, kod yazma prosesində süni intellektdən birbaşa istifadə etmirəm. Başqa sözlə, süni intellektdən müxtəlif dizayn yanaşmaları, tətbiq üsulları və ya problem həlli yolları haqqında məlumat əldə etmək üçün yararlanıram, daha sonra isə ən yaxşı variantı şəxsən özüm seçirəm.",
 
     // Portfolio tab
-    "portfolio_desc_1" => "Aşağıda mənim hazırladığım tətbiqlər, alətlər, library-lər və xidmətlər qeyd olunub. Bütün layihələrimlə tanış olmaq üçün ",
-    "portfolio_desc_2" => "GitHub profilimə",
-    "portfolio_desc_3" => " daxil olun.",
+    "featured" => "Seçilmiş",
+    "other_projects" => "Digər layihələr",
     "tech_stack" => "Tech stack",
     "app" => "Tətbiq",
     "desktop" => "PC",

@@ -2,7 +2,7 @@
 
 return [
     "laney" => [
-        "description" => "A messenger for VK social network for Windows. Reached 10 000 users.",
+        "description" => "A messenger for VK social network for Windows 10 and 11, including XBOX and Win10 mobile.<br>Downloaded 10000+ times.",
         "linkLoc" => [
             "download" => "Download",
             "source" => "Source code"
@@ -16,7 +16,7 @@ return [
         ],
     ],
     "laney2" => [
-        "description" => "A cross-platform version of Laney for Windows, macOS and Linux.",
+        "description" => "A cross-platform version of Laney.<br>Windows, macOS and Linux.",
         "linkLoc" => [
             "source" => "Source code"
         ],

@@ -48,9 +48,8 @@ return [
     "personal_p3" => "When working on my projects, I do not use AI directly in the process of writing code. In other words, I use AI to learn about various design approaches, implementation methods, or ways to solve problems, and then I personally select the best option.",
 
     // Portfolio tab
-    "portfolio_desc_1" => "Below are apps, tools, libraries and services that I developed. Visit to ",
-    "portfolio_desc_2" => "my Github profile",
-    "portfolio_desc_3" => " to see all my projects.",
+    "featured" => "Featured",
+    "other_projects" => "Other projects",
     "tech_stack" => "Tech stack",
     "app" => "App",
     "desktop" => "PC",

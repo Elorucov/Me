@@ -2,7 +2,7 @@
 
 return [
     "laney" => [
-        "description" => "Мессенджер соцсети ВКонтакте для Windows. Достиг 10 000 пользователей.",
+        "description" => "Мессенджер социальной сети ВКонтакте для Windows 10 и 11 (XBOX и моб. устройства).<br>Более 10000 скачиваний.",
         "linkLoc" => [
             "download" => "Скачать",
             "source" => "Исходники"
@@ -16,7 +16,7 @@ return [
         ],
     ],
     "laney2" => [
-        "description" => "Кросс-платформенная версия Laney для Windows, macOS и Linux.",
+        "description" => "Кросс-платформенная версия Laney для ПК.<br>Windows, macOS и Linux.",
         "linkLoc" => [
             "source" => "Исходники"
         ],

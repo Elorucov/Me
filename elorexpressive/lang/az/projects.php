@@ -4,7 +4,7 @@
 
 return [
     "laney" => [
-        "description" => "Windows üçün VK sosial şəbəkəsinin messenceri. 10 000 istifadəçiyə çatıb.",
+        "description" => "Windows 10 və 11 (XBOX daxili) üçün VK sosial şəbəkəsinin messenceri. 10000+ dəfə yüklənilib.",
         "linkLoc" => [
             "download" => "Yüklə",
             "source" => "Mənbə kodu"

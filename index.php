@@ -4,10 +4,15 @@
 
 require_once 'elorexpressive/inc/i18n.php';
 
-/** .png fallback for a .webp logo images */
+/** .png and .jpg fallbacks for a .webp images */
 function pngFallback(string $url): string
 {
     return preg_replace('/\.webp$/', ".png", $url);
+}
+
+function jpgFallback(string $url): string
+{
+    return preg_replace('/\.webp$/', ".jpg", $url);
 }
 
 /** Parse template. Example: t("Hello, {text}!", ["text" => "world"]); */
@@ -16,6 +21,12 @@ function t(string $text, array $vars = []): string
     $repl = [];
     foreach ($vars as $k => $v) $repl['{' . $k . '}'] = $v;
     return strtr($text, $repl);
+}
+
+/** Remove multiple spaces from the buffer. */
+function removeWhitespace($buffer)
+{
+    return preg_replace('/\s+/', ' ', $buffer);
 }
 
 const BLOG_URL = "https://elor.top/blog/";
@@ -36,11 +47,12 @@ $age =
         ? date("Y") - $birthDate[2] - 1
         : date("Y") - $birthDate[2];
 
-
-
 $logoBase = "elorexpressive/res/logos/";
+$shotBase = "elorexpressive/res/screenshots/";
 
 $projects = localizeList(require 'elorexpressive/data/projects.php', $lang, 'projects.php');
+$projectsFeatured = array_filter($projects, fn ($val, $key) => $val["featured"] === true, ARRAY_FILTER_USE_BOTH);
+$projectsOther = array_filter($projects, fn ($val, $key) => $val["featured"] === false, ARRAY_FILTER_USE_BOTH);
 $projectsMetaLoc = [
     "app" => $l["app"],
     "desktop" => $l["desktop"],
@@ -59,7 +71,9 @@ $postsContent = file_get_contents("blog/posts.json");
 $posts = json_decode($postsContent, true);
 $posts = array_reverse($posts);
 
+ob_start('removeWhitespace');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -238,10 +252,73 @@ $posts = array_reverse($posts);
             </content>
 
             <content id="projectsTab">
-                <h1>💼 <?= $l["portfolio"] ?></h1>
-                <p><?= $l["portfolio_desc_1"] ?><a href="https://github.com/Elorucov" target="_blank"><?= $l["portfolio_desc_2"] ?></a><?= $l["portfolio_desc_3"] ?></p>
+                <h1 class="noBorder"><?= $l["featured"] ?></h1>
+                <div class="showcaseContainer">
+                    <style>
+                        <?php
+                            $selectors = [];
+                            foreach ($projectsFeatured as $i => $p) {
+                                $selectors[] = "#si{$i}:checked ~ #p{$i}";
+                            }
+                            echo implode(",", $selectors);
+                        ?>{display:block;}
+
+                        <?php foreach ($projectsFeatured as $i => $p): ?>#si<?= $i ?>:checked + label, #si<?= $i ?>:checked ~ #p<?= $i ?>{--accent:<?= $p["color"] ?>}
+                        <?php endforeach; ?>
+
+                        <?php foreach ($projectsFeatured as $i => $p): ?>picture#ss<?= $i ?> {
+                            background-image: url('<?= e(jpgFallback($p["screenshot"]["light"])); ?>');
+                            background-image: image-set(url('<?= e($p["screenshot"]["light"]); ?>') type("image/webp"), url('<?= e(jpgFallback($p["screenshot"]["light"])); ?>') type("image/jpeg"));
+
+                            @media (prefers-color-scheme: dark) {
+                                background-image: url('<?= e(jpgFallback($p["screenshot"]["dark"])); ?>');
+                                background-image: image-set(url('<?= e($p["screenshot"]["dark"]); ?>') type("image/webp"), url('<?= e(jpgFallback($p["screenshot"]["dark"])); ?>') type("image/jpeg"));
+                            }
+                        }
+                        <?php endforeach; ?>
+                    </style>
+
+                    <?php $n = 0; foreach ($projectsFeatured as $i => $p): ?>
+                        <input id="si<?= $i ?>" type="radio" name="fp" <?= $n++ === 0 ? "checked" : ""; ?>>
+                        <label for="si<?= $i ?>"><?= $p["name"] ?></label>
+                    <?php endforeach; ?>
+
+                    <?php foreach ($projectsFeatured as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
+                        <div id="p<?= $i ?>" class="showcaseItem">
+                            <content class="projectShowcase">
+                                <picture id="ss<?= $i ?>">
+                                </picture>
+                                <summary>
+                                    <h2><?= $p["name"] ?></h2>
+                                    <div class="meta"><?= t(e(implode(" · ", $p["meta"])), $projectsMetaLoc) ?></div>
+                                    <p><?= $p["description"] ?></p>
+                                    <div class="verticalLinks">
+                                        <?php foreach ($p["links"] as $key => $url): ?><a href="<?= e($url) ?>"><?= e($p["linkLoc"][$key] ?? $key) ?></a><?php endforeach; ?>
+                                        <?php if (!empty($p["techStack"])): ?>
+                                        <input type="checkbox" class="dlg" id="<?= $techId ?>">
+                                        <label for="<?= $techId ?>"><?= $l["tech_stack"] ?></label>
+                                            <div class="dlg_wrap">
+                                                <label class="dlg_closer" for="<?= $techId ?>"></label>
+                                                <div class="dlg_content">
+                                                    <ul>
+                                                        <?php foreach ($p["techStack"] as $tech): ?>
+                                                            <li><?= $tech ?></li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </summary>
+                            </content>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <h2 class="noBorder"><?= $l["other_projects"] ?></h2>
+
                 <div class="adaptiveGrid">
-                    <?php foreach ($projects as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
+                    <?php foreach ($projectsOther as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
                         <div class="card" style="--accent:<?= e($p["color"]) ?>">
                             <?php if (isset($logo["icon"])): ?>
                                 <aside>
@@ -290,7 +367,7 @@ $posts = array_reverse($posts);
             </content>
 
             <content id="contactsTab">
-                <h1>🖊️ <?= $l["contacts"] ?></h1>
+                <h1><?= $l["contacts"] ?></h1>
                 <p><?= $l["contacts_desc"] ?></p>
                 <div class="adaptiveGrid">
                     <?php foreach ($contacts as $c): ?>
@@ -374,3 +451,5 @@ $posts = array_reverse($posts);
         </main>
     </body>
 </html>
+
+<?php ob_get_flush(); ?>

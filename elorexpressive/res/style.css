@@ -11,6 +11,7 @@
     --text_primary_l: #000;
     --on_page_background_l: #fff;
     --text_secondary_l: #6d7885;
+    --muted_background_l: #e0e0e0;
 
 
     /* Dark */
@@ -18,11 +19,13 @@
     --text_primary_d: #fff;
     --on_page_background_d: #222;
     --text_secondary_d: #969a9f;
+    --muted_background_d: #303030;
 
     --page_background: light-dark(var(--page_background_l), var(--page_background_d));
     --text_primary: light-dark(var(--text_primary_l), var(--text_primary_d));
     --on_page_background: light-dark(var(--on_page_background_l), var(--on_page_background_d));
     --text_secondary: light-dark(var(--text_secondary_l), var(--text_secondary_d));
+    --muted_background: light-dark(var(--muted_background_l), var(--muted_background_d));
 }
 
 
@@ -33,6 +36,7 @@
         --text_primary: var(--text_primary_l);
         --on_page_background: var(--on_page_background_l);
         --text_secondary: var(--text_secondary_l);
+        --muted_background: var(--muted_background_l);
 
         @media (prefers-color-scheme: dark) {
             /* Fallback for old browsers */
@@ -40,6 +44,7 @@
             --text_primary: var(--text_primary_l);
             --on_page_background: var(--on_page_background_l);
             --text_secondary: var(--text_secondary_l);
+            --muted_background:  var(--muted_background_d);
         }
     }
 }
@@ -47,6 +52,7 @@
 :root {
     /* For Windows, because it use "Courier" as default mono font  */
     --mono_font: "Cascadia Mono", "Consolas", "Lucida Console", monospace;
+    --display_font: "NT Somic", sans-serif;
 
     --animation_slowdown_multiplier: 1;
     --content_max_width: 960px;
@@ -56,6 +62,7 @@
     --person_picture_size: 232px;
     --knowledge_card_icon_size: 36px;
     --infoblock_header_plate_width: 6px;
+    --projectShowcaseInfoWidth: 256px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -165,7 +172,7 @@ h6,
 header,
 #mainMenu,
 p.asParagraph {
-    font-family: "NT Somic", sans-serif;
+    font-family: var(--display_font);
     font-optical-sizing: auto;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
@@ -355,7 +362,8 @@ main > content {
 /* workaround for lazy-loading issue for all tabs except "about" */
 /* because "about" is main tab and images here are loaded anyway */
 
-main content:not(#aboutTab) img {
+main content:not(#aboutTab) img,
+main content:not(#aboutTab) showcaseItem picture {
     display: none;
 }
 
@@ -370,7 +378,8 @@ main:has(#moret:checked) #moreTab {
 
 main:has(#projects:checked) #projectsTab img,
 main:has(#contacts:checked) #contactsTab img,
-main:has(#moret:checked) #moreTab img {
+main:has(#moret:checked) #moreTab img,
+main:has(#projects:checked) #projectsTab showcaseItem picture {
     display: unset;
 }
 
@@ -516,6 +525,12 @@ content p.asParagraph {
     margin-top: 0px;
 }
 
+.meta {
+    font-size: 0.85em;
+    color: var(--text_secondary);
+    margin-bottom: 2px;
+}
+
 a.card,
 a.card content {
     text-decoration: none;
@@ -582,8 +597,6 @@ a.card:hover > section.cardContent > header {
 }
 
 .card > section.cardContent > content > .meta {
-    font-size: 0.85em;
-    color: var(--text_secondary);
     margin-bottom: 2px;
 }
 
@@ -851,11 +864,95 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     margin-bottom: 0px;
 }
 
+.showcaseContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    margin-bottom: 16px;
+    justify-content: start;
+}
+
+.showcaseContainer > .showcaseItem {
+    display: none;
+    flex-grow: 1;
+    width: 100%;
+    background: var(--on_page_background);
+    border: 2px solid var(--accent);
+}
+
+.showcaseContainer > input[type="radio"] {
+    display: none;
+}
+
+.showcaseContainer > label {
+    cursor: pointer;
+    user-select: none;
+    padding: 2px 8px;
+    margin-right: 2px;
+    font-weight: 500;
+    height: 24px;
+    line-height: 23px; /* height - half of carousel item border thickness */
+    font-size: 14px;
+    background: var(--muted_background);
+}
+
+.showcaseContainer > input:checked+label {
+    background: var(--accent);
+    color: #fff;
+}
+
+.projectShowcase {
+    display: flex;
+}
+
+.projectShowcase > picture:first-child {
+    flex-grow: 1;
+    padding-top: calc(calc(100% - var(--projectShowcaseInfoWidth)) / 20 * 13);
+    background-size: cover;
+    background-position: center;
+}
+
+.projectShowcase > summary {
+    box-sizing: border-box;
+    width: var(--projectShowcaseInfoWidth);
+    padding: 16px;
+    font-size: 0.875em;
+}
+
+.projectShowcase > summary > h2 {
+    margin-top: 0px;
+}
+
+.projectShowcase > summary > h2+.meta {
+    margin-top: -4px;
+    margin-bottom: 8px;
+}
+
+.verticalLinks > a {
+    display: block;
+}
+
+.verticalLinks > a:before {
+    content: '➡️ ';
+}
+
+.verticalLinks > input[type="checkbox"].dlg + label {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.verticalLinks > input[type="checkbox"].dlg + label:before {
+    content: '⚙️ ';
+}
+
 body:not(.light) {
     @media (prefers-color-scheme: dark) {
         #contactsTab .card > aside:first-child > svg,
         .card > section.cardContent > content > input[type="checkbox"].dlg + label,
-        .card content a:not(.chip) {
+        .card content a:not(.chip),
+        .dlg_content a,
+        .projectShowcase summary .verticalLinks > a,
+        .projectShowcase summary .verticalLinks > input[type="checkbox"].dlg + label {
             filter: brightness(1.25);
         }
     }
@@ -878,6 +975,29 @@ body:not(.light) {
 
     .masonryGrid {
       column-count: 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .showcaseContainer {
+        flex-wrap: wrap;
+    }
+
+    .showcaseContainer > label {
+        line-height: 25px;
+    }
+
+    .projectShowcase {
+        flex-direction: column;
+    }
+
+    .projectShowcase > picture:first-child {
+        flex-grow: unset;
+        padding-top: calc(100% / 20 * 13);
+    }
+
+    .projectShowcase > summary {
+        width: 100%;
     }
 }
 
