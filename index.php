@@ -252,7 +252,7 @@ ob_start('removeWhitespace');
             </content>
 
             <content id="projectsTab">
-                <h1 class="noBorder"><?= $l["featured"] ?></h1>
+                <h2 class="noBorder"><?= $l["featured"] ?></h2>
                 <div class="showcaseContainer">
                     <style>
                         <?php

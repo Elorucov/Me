@@ -2,7 +2,7 @@
 
 return [
     "laney" => [
-        "description" => "A messenger for VK social network for Windows 10 and 11, including XBOX and Win10 mobile.<br>Downloaded 10000+ times.",
+        "description" => "A messenger for VK social network for Windows 10 and 11, including XBOX.<br>Downloaded 10000+ times.",
         "linkLoc" => [
             "download" => "Download",
             "source" => "Source code"

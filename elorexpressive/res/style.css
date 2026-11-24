@@ -62,7 +62,7 @@
     --person_picture_size: 232px;
     --knowledge_card_icon_size: 36px;
     --infoblock_header_plate_width: 6px;
-    --projectShowcaseInfoWidth: 256px;
+    --projectShowcaseInfoWidth: 224px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -903,11 +903,12 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
 
 .projectShowcase {
     display: flex;
+    position: relative;
 }
 
 .projectShowcase > picture:first-child {
     flex-grow: 1;
-    padding-top: calc(calc(100% - var(--projectShowcaseInfoWidth)) / 20 * 13);
+    padding-top: calc(calc(100% - var(--projectShowcaseInfoWidth)) / 360 * 233);
     background-size: cover;
     background-position: center;
 }
@@ -993,7 +994,7 @@ body:not(.light) {
 
     .projectShowcase > picture:first-child {
         flex-grow: unset;
-        padding-top: calc(100% / 20 * 13);
+        padding-top: calc(100% / 360 * 233);
     }
 
     .projectShowcase > summary {
