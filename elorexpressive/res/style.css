@@ -956,6 +956,33 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     content: '⚙️ ';
 }
 
+#langSwitcher {
+    position: fixed;
+    left: 0;
+    top: var(--big_spacing);
+    display: flex;
+    flex-direction: column;
+}
+
+#langSwitcher > a {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 16px;
+    text-align: center;
+    text-transform: lowercase;
+    font-weight: 600;
+    font-family: var(--display_font);
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
+#langSwitcher > a.current {
+    cursor: default;
+    background-color: var(--color3);
+}
+
 body:not(.light) {
     @media (prefers-color-scheme: dark) {
         #contactsTab .card > aside:first-child > svg,
@@ -986,6 +1013,14 @@ body:not(.light) {
 
     .masonryGrid {
       column-count: 1;
+    }
+
+    #langSwitcher {
+        flex-direction: row;
+        top: unset;
+        left: unset;
+        bottom: 0px;
+        right: var(--big_spacing);
     }
 }
 

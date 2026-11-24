@@ -456,6 +456,11 @@ ob_start('removeWhitespace');
                 </branding>
             </content>
         </main>
+        <div id="langSwitcher">
+            <?php foreach (SUPPORTED_LANGS as $elang): ?>
+                <a href="?lang=<?= $elang ?>" <?= $lang === $elang ? " class='current'" : "" ?>><?= $elang ?></a>
+            <?php endforeach; ?>
+        </div>
     </body>
 </html>
 
