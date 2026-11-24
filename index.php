@@ -423,6 +423,9 @@ ob_start('removeWhitespace');
                                 <a href="https://elor.top/res/docs/cv_en.pdf"><?= $l["my_cv"] ?></a>
                             </li>
                             <li>
+                                <a href="https://github.com/Elorucov/Me"><?= $l["site_source"] ?></a>
+                            </li>
+                            <li>
                                 <a target="_blank" href="https://elor.top/mustread"><?= $l["must_read_articles"] ?></a>
                                 <content><?= $l["must_read_articles_desc"] ?></content>
                             </li>
