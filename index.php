@@ -31,6 +31,13 @@ function removeWhitespace($buffer)
 
 const BLOG_URL = "https://elor.top/blog/";
 $currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$currentDay = date("z");
+
+$bodyClasses = [];
+if (isset($_GET["ny"]) || ($currentDay <= 31 || $currentDay >= 334)) {
+    $bodyClasses[] = "ny";
+}
+
 
 updateLang($currentUrl);
 
@@ -97,7 +104,7 @@ ob_start('removeWhitespace');
         <!-- resources -->
         <link rel="stylesheet" type="text/css" href="elorexpressive/res/style.css"/>
     </head>
-    <body>
+    <body<?= count($bodyClasses) > 0 ? " class='".implode(" ", $bodyClasses)."'" : ""; ?>>
         <main>
             <nav id="mainMenu">
                 <!--<decor></decor>-->
