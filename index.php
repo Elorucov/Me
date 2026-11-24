@@ -146,11 +146,11 @@ ob_start('removeWhitespace');
                             <header><?= $l["knowledge_windows_dev"] ?></header>
                             <content>
                                 <chips>
-                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
-                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/windows/uwp/get-started/">UWP</a>
-                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/">WinUI 3</a>
-                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/">WPF</a>
-                                    <a class="chip less" target="_blank" href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/">WinForms</a>
+                                    <a class="chip" href="https://dot.net">.NET</a>
+                                    <a class="chip" href="https://learn.microsoft.com/en-us/windows/uwp/get-started/">UWP</a>
+                                    <a class="chip" href="https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/">WinUI 3</a>
+                                    <a class="chip" href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/">WPF</a>
+                                    <a class="chip less" href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/">WinForms</a>
                                 </chips>
                             </content>
                         </section>
@@ -166,8 +166,8 @@ ob_start('removeWhitespace');
                             <header><?= $l["knowledge_crossplatform_ui"] ?><span title="<?= $l["knowledge_crossplatform_ui_notice"] ?>">*</span></header>
                             <content>
                                 <chips>
-                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
-                                    <a class="chip" target="_blank" href="https://avaloniaui.net">Avalonia</a>
+                                    <a class="chip" href="https://dot.net">.NET</a>
+                                    <a class="chip" href="https://avaloniaui.net">Avalonia</a>
                                 </chips>
                             </content>
                         </section>
@@ -183,8 +183,8 @@ ob_start('removeWhitespace');
                             <header><?= $l["knowledge_tools"] ?></header>
                             <content>
                                 <chips>
-                                    <a class="chip" target="_blank" href="https://dot.net">.NET</a>
-                                    <a class="chip" target="_blank" href="https://learn.microsoft.com/en-us/powershell/">PowerShell</a>
+                                    <a class="chip" href="https://dot.net">.NET</a>
+                                    <a class="chip" href="https://learn.microsoft.com/en-us/powershell/">PowerShell</a>
                                 </chips>
                             </content>
                         </section>
@@ -200,8 +200,8 @@ ob_start('removeWhitespace');
                             <header><?= $l["knowledge_web"] ?></header>
                             <content>
                                 <chips>
-                                    <a class="chip" target="_blank" href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.NET Core</a>
-                                    <a class="chip" target="_blank" href="https://php.net">PHP</a>
+                                    <a class="chip" href="https://dotnet.microsoft.com/en-us/apps/aspnet">ASP.NET Core</a>
+                                    <a class="chip" href="https://php.net">PHP</a>
                                     <span class="chip">JavaScript</span>
                                     <span class="chip less">React</span>
                                 </chips>
@@ -227,7 +227,7 @@ ob_start('removeWhitespace');
                         <ul>
                             <li><?= $l["skills_base"] ?>: <b>HTML5, CSS3, JS</b></li>
                             <li><?= $l["skills_experience"] ?> <b>React</b></li>
-                            <li><?= $l["skills_server"] ?>: <b><a href="https://nginx.org" target="_blank">nginx</a>, <a href="https://caddyserver.com" target="_blank">Caddy</a></b></li>
+                            <li><?= $l["skills_server"] ?>: <b><a href="https://nginx.org">nginx</a>, <a href="https://caddyserver.com">Caddy</a></b></li>
                             <li><?= $l["skills_web_light"] ?>: <b>PHP</b></li>
                             <li><?= $l["skills_on_else"] ?>: <b>ASP.NET 8+ (API, MVC, Razor pages)</b></li>
                         </ul>
@@ -404,13 +404,13 @@ ob_start('removeWhitespace');
                         <ul>
                             <?php foreach ($posts as $post): $pubDate = strtotime($post["PublishDate"]); ?>
                                 <li>
-                                    <a target="_blank" href="<?= BLOG_URL . $post["RelativeUrl"] ?>">
+                                    <a href="<?= BLOG_URL . $post["RelativeUrl"] ?>">
                                         <?= $post["Title"] ?>
                                     </a>
                                     <content><?= $post["Summary"] ?></content>
                                 </li>
                             <?php endforeach; ?>
-                            <li><a target="_blank" href="<?= BLOG_URL; ?>"><?= $l["more_items"] ?> →</a></li>
+                            <li><a href="<?= BLOG_URL; ?>"><?= $l["more_items"] ?> →</a></li>
                         </ul>
                     </div>
 
@@ -426,12 +426,12 @@ ob_start('removeWhitespace');
                                 <a href="https://github.com/Elorucov/Me"><?= $l["site_source"] ?></a>
                             </li>
                             <li>
-                                <a target="_blank" href="https://elor.top/mustread"><?= $l["must_read_articles"] ?></a>
+                                <a href="https://elor.top/mustread"><?= $l["must_read_articles"] ?></a>
                                 <content><?= $l["must_read_articles_desc"] ?></content>
                             </li>
                             <li>
-                                <a target="_blank" href="https://github.com/nnttttyyppee/NT-Somic">NT Somic</a>
-                                <content><?= $l["nt_somic_desc"] ?>: <a target="_blank" href="https://nnttttyyppee.cc/">NT Type</a>.</content>
+                                <a href="https://github.com/nnttttyyppee/NT-Somic">NT Somic</a>
+                                <content><?= $l["nt_somic_desc"] ?>: <a href="https://nnttttyyppee.cc/">NT Type</a>.</content>
                             </li>
                         </ul>
                     </div>
@@ -442,11 +442,11 @@ ob_start('removeWhitespace');
                         </header>
                         <ul>
                             <li>
-                                <a target="_blank" href="https://sominemo.com">sominemo.com</a>
+                                <a href="https://sominemo.com">sominemo.com</a>
                                 <content><i>Sergey Dilong (sominemo)</i> —  web and Flutter apps developer &amp; artist. Author of logos for Laney and WidgetShot.</content>
                             </li>
                             <li>
-                                <a target="_blank" href="https://tonsky.me">tonsky.me</a>
+                                <a href="https://tonsky.me">tonsky.me</a>
                                 <content><i>Nikita Prokopov (nikitonsky)</i> — software engineer. I'm taking notes on his posts about how <i>not</i> to develop software and make UI.</content>
                             </li>
                         </ul>
