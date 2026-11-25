@@ -37,6 +37,13 @@ return [
             "source" => "Source code"
         ]
     ],
+    "wsc" => [
+        "description" => "This Windows program allows you to resize windows and center them as you see fit.",
+        "linkLoc" => [
+            "download" => "Download from Github",
+            "source" => "Source code"
+        ]
+    ],
     "purpleblog" => [
         "description" => "A CLI tool for converting Markdown files to HTML pages with template.",
         "linkLoc" => [

@@ -58,6 +58,19 @@ return [
             "source" => "https://github.com/Elorucov/WidgetShot",
         ]
     ],
+    "wsc" => [
+        "featured" => true,
+        "name" => "Window Size Control",
+        "meta" => ["WinForms", ".NET", "{app}", "2026"],
+        "screenshot" => [
+            "light" => $shotBase . "wsc.webp",
+            "dark" => $shotBase . "wsc.webp",
+        ],
+        "links" => [
+            "download" => "https://github.com/Elorucov/WindowSizeControl/releases",
+            "source" => "https://github.com/Elorucov/WindowSizeControl",
+        ]
+    ],
     "purpleblog" => [
         "featured" => false,
         "name" => "PurpleBlog",

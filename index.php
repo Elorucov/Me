@@ -270,7 +270,10 @@ ob_start('removeWhitespace');
                             echo implode(",", $selectors);
                         ?>{display:block;}
 
-                        <?php foreach ($projectsFeatured as $i => $p): ?>#si<?= $i ?>:checked + label, #si<?= $i ?>:checked ~ #p<?= $i ?>{--accent:<?= $p["color"] ?>}
+                        <?php foreach ($projectsFeatured as $i => $p): ?>
+                        <?php if (!empty($p["color"])): ?>
+                            #si<?= $i ?>:checked + label, #si<?= $i ?>:checked ~ #p<?= $i ?>{--accent:<?= $p["color"] ?>}
+                        <?php endif; ?>
                         <?php endforeach; ?>
 
                         <?php foreach ($projectsFeatured as $i => $p): ?>picture#ss<?= $i ?> {
@@ -290,7 +293,7 @@ ob_start('removeWhitespace');
                         <label for="si<?= $i ?>"><?= $p["name"] ?></label>
                     <?php endforeach; ?>
 
-                    <?php foreach ($projectsFeatured as $i => $p): $logo = $p["logo"]; $techId = "tech_" . $i; ?>
+                    <?php foreach ($projectsFeatured as $i => $p): $techId = "tech_" . $i; ?>
                         <div id="p<?= $i ?>" class="showcaseItem">
                             <content class="projectShowcase">
                                 <picture id="ss<?= $i ?>">

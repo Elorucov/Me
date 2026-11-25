@@ -39,6 +39,13 @@ return [
             "source" => "Mənbə kodu"
         ]
     ],
+    "wsc" => [
+        "description" => "Windows üçün nəzərdə tutulmuş proqram pəncərələrin istədiyiniz kimi ölçüsünü dəyişməyə və onları ekranın mərkəzində yerləşdirməyə imkan verir.",
+        "linkLoc" => [
+            "download" => "GitHub-dan yüklə",
+            "source" => "Mənbə kodu"
+        ]
+    ],
     "purpleblog" => [
         "description" => "Markdown fayllarını şablonlu HTML səhifələrinə çevirmək üçün CLI aləti.",
         "linkLoc" => [
