@@ -899,7 +899,7 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     user-select: none;
     padding: 2px 8px;
     margin-right: 2px;
-    font-weight: 500;
+    font-weight: 600;
     height: 24px;
     line-height: 23px; /* height - half of carousel item border thickness */
     font-size: 14px;
