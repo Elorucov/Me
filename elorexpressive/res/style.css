@@ -964,7 +964,8 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     flex-direction: column;
 }
 
-#langSwitcher > a {
+#langSwitcher > input[type="submit"] {
+    appearance: none;
     width: 24px;
     height: 24px;
     line-height: 24px;
@@ -975,10 +976,12 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
     font-family: var(--display_font);
     background-color: #000;
     color: #fff;
-    text-decoration: none;
+    border: 0px;
+    padding: 0px;
+    cursor: pointer;
 }
 
-#langSwitcher > a.current {
+#langSwitcher > input[type="submit"].current {
     cursor: default;
     background-color: var(--color3);
 }

@@ -11,12 +11,12 @@ function e(string $s): string
 /** Set language by "?lang=" parameter. */
 function updateLang($url) {
     header('Vary: Accept-Language, Cookie');
-    if (isset($_GET['lang']) && in_array($_GET['lang'], SUPPORTED_LANGS, true)) {
-        setcookie(LANG_COOKIE, $_GET['lang'], [
+    if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], SUPPORTED_LANGS, true)) {
+        setcookie(LANG_COOKIE, $_REQUEST['lang'], [
             'expires'  => time() + 365 * 24 * 3600,
             'path'     => $url
         ]);
-        $_COOKIE[LANG_COOKIE] = $_GET['lang'];
+        $_COOKIE[LANG_COOKIE] = $_REQUEST['lang'];
     }
 }
 

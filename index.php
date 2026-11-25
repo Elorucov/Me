@@ -459,9 +459,9 @@ ob_start('removeWhitespace');
                 </branding>
             </content>
         </main>
-        <div id="langSwitcher">
+        <form method="post" id="langSwitcher">
             <?php foreach (SUPPORTED_LANGS as $elang): ?>
-                <a href="?lang=<?= $elang ?>" <?= $lang === $elang ? " class='current'" : "" ?>><?= $elang ?></a>
+                <input type="submit" name="lang" value="<?= $elang ?>" <?= $lang === $elang ? " class='current'" : "" ?>/>
             <?php endforeach; ?>
         </div>
     </body>
