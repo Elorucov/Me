@@ -958,10 +958,17 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
 
 #langSwitcher {
     position: fixed;
-    left: 0;
-    top: var(--big_spacing);
+    left: calc(calc(calc(100% - var(--content_max_width)) / 2) + var(--content_max_width));
+    top: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    @media (max-width: 1104px) {
+        top: unset;
+        left: unset;
+        bottom: 0;
+        right: var(--big_spacing);
+    }
 }
 
 #langSwitcher > input[type="submit"] {
@@ -1016,14 +1023,6 @@ body:not(.light) {
 
     .masonryGrid {
       column-count: 1;
-    }
-
-    #langSwitcher {
-        flex-direction: row;
-        top: unset;
-        left: unset;
-        bottom: 0px;
-        right: var(--big_spacing);
     }
 }
 
