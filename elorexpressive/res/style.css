@@ -63,6 +63,7 @@
     --knowledge_card_icon_size: 36px;
     --infoblock_header_plate_width: 6px;
     --project_showcase_info_width: 258px;
+    --project_showcase_screenshot_aspect_ratio: 360 * 233;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -372,8 +373,7 @@ main > content {
 /* workaround for lazy-loading issue for all tabs except "about" */
 /* because "about" is main tab and images here are loaded anyway */
 
-main content:not(#aboutTab) img,
-main content:not(#aboutTab) .projectShowcase > picture {
+main content:not(#aboutTab) img {
     display: none;
 }
 
@@ -388,8 +388,7 @@ main:has(#moret:checked) #moreTab {
 
 main:has(#projects:checked) #projectsTab img,
 main:has(#contacts:checked) #contactsTab img,
-main:has(#moret:checked) #moreTab img,
-main:has(#projects:checked) #projectsTab .projectShowcase > picture {
+main:has(#moret:checked) #moreTab img {
     display: unset;
 }
 
@@ -914,13 +913,26 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
 .projectShowcase {
     display: flex;
     position: relative;
+    content-visibility: auto;
 }
 
-.projectShowcase > picture:first-child {
+.projectShowcase > .screenshot:first-child {
     flex-grow: 1;
-    padding-top: calc(calc(100% - var(--project_showcase_info_width)) / 360 * 233);
+    padding-top: calc(calc(100% - var(--project_showcase_info_width)) / var(--project_showcase_screenshot_aspect_ratio));
     background-size: cover;
     background-position: center;
+    position: relative;
+}
+
+.projectShowcase > .screenshot:first-child > picture {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: calc(100% / var(--project_showcase_screenshot_aspect_ratio) * -1);
+}
+
+.projectShowcase > .screenshot:first-child > picture > img {
+    width: 100%;
 }
 
 .projectShowcase > summary {
@@ -1041,9 +1053,9 @@ body:not(.light) {
         flex-direction: column;
     }
 
-    .projectShowcase > picture:first-child {
+    .projectShowcase > .screenshot:first-child {
         flex-grow: unset;
-        padding-top: calc(100% / 360 * 233);
+        padding-top: calc(100% / var(--project_showcase_screenshot_aspect_ratio));
     }
 
     .projectShowcase > summary {

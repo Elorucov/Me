@@ -275,17 +275,6 @@ ob_start('removeWhitespace');
                             #si<?= $i ?>:checked + label, #si<?= $i ?>:checked ~ #p<?= $i ?>{--accent:<?= $p["color"] ?>}
                         <?php endif; ?>
                         <?php endforeach; ?>
-
-                        <?php foreach ($projectsFeatured as $i => $p): ?>picture#ss<?= $i ?> {
-                            background-image: url('<?= e(jpgFallback($p["screenshot"]["light"])); ?>');
-                            background-image: image-set(url('<?= e($p["screenshot"]["light"]); ?>') type("image/webp"), url('<?= e(jpgFallback($p["screenshot"]["light"])); ?>') type("image/jpeg"));
-
-                            @media (prefers-color-scheme: dark) {
-                                background-image: url('<?= e(jpgFallback($p["screenshot"]["dark"])); ?>');
-                                background-image: image-set(url('<?= e($p["screenshot"]["dark"]); ?>') type("image/webp"), url('<?= e(jpgFallback($p["screenshot"]["dark"])); ?>') type("image/jpeg"));
-                            }
-                        }
-                        <?php endforeach; ?>
                     </style>
 
                     <?php $n = 0; foreach ($projectsFeatured as $i => $p): ?>
@@ -296,8 +285,13 @@ ob_start('removeWhitespace');
                     <?php foreach ($projectsFeatured as $i => $p): $techId = "tech_" . $i; ?>
                         <div id="p<?= $i ?>" class="showcaseItem">
                             <content class="projectShowcase">
-                                <picture id="ss<?= $i ?>">
-                                </picture>
+                                <div class="screenshot" id="ss<?= $i ?>">
+                                    <picture>
+                                        <source media="(prefers-color-scheme: dark)" srcset="<?= e($p["screenshot"]["dark"]); ?>">
+                                        <source media="(prefers-color-scheme: light)" srcset="<?= e($p["screenshot"]["light"]); ?>">
+                                        <img loading="lazy" src="<?= e(jpgFallback($p["screenshot"]["light"])); ?>">
+                                    </picture>
+                                </div>
                                 <summary>
                                     <h2><?= $p["name"] ?></h2>
                                     <div class="meta"><?= t(e(implode(" · ", $p["meta"])), $projectsMetaLoc) ?></div>
