@@ -373,7 +373,7 @@ main > content {
 /* because "about" is main tab and images here are loaded anyway */
 
 main content:not(#aboutTab) img,
-main content:not(#aboutTab) showcaseItem picture {
+main content:not(#aboutTab) .projectShowcase > picture {
     display: none;
 }
 
@@ -389,7 +389,7 @@ main:has(#moret:checked) #moreTab {
 main:has(#projects:checked) #projectsTab img,
 main:has(#contacts:checked) #contactsTab img,
 main:has(#moret:checked) #moreTab img,
-main:has(#projects:checked) #projectsTab showcaseItem picture {
+main:has(#projects:checked) #projectsTab .projectShowcase > picture {
     display: unset;
 }
 
