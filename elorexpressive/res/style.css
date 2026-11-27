@@ -688,10 +688,12 @@ a.chip:hover {
 .infoblock p, .infoblock content, .infoblock ul {
     padding: 12px;
     margin-bottom: 0px;
+    padding-left: 26px;
 }
 
 .infoblock ul > li::marker {
-    content: '';
+    content: '• ';
+    color: var(--text_secondary);
 }
 
 .knowledgeCard {
