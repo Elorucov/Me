@@ -914,8 +914,6 @@ input[type="checkbox"].dlg:checked + label + .dlg_wrap {
 
 .projectShowcase {
     display: flex;
-    position: relative;
-    content-visibility: auto;
 }
 
 .projectShowcase > .screenshot:first-child {
