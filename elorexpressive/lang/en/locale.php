@@ -29,7 +29,7 @@ return [
     "skills_primary" => "Primary",
     "skills_primary_language" => "Primary language",
     "skills_base" => "Base",
-    "skills_experience" => "Having some experience with",
+    "skills_experience" => "Some experience with",
     "skills_server" => "Web-servers",
     "skills_web_light" => "For lightweight web-sites",
     "skills_on_else" => "For everything else",
