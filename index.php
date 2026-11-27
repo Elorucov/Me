@@ -229,7 +229,7 @@ ob_start('removeWhitespace');
                             <li><?= $l["skills_experience"] ?> <b>React</b></li>
                             <li><?= $l["skills_server"] ?>: <b><a href="https://nginx.org">nginx</a>, <a href="https://caddyserver.com">Caddy</a></b></li>
                             <li><?= $l["skills_web_light"] ?>: <b>PHP</b></li>
-                            <li><?= $l["skills_on_else"] ?>: <b>ASP.NET 8+ (API, MVC, Razor pages)</b></li>
+                            <li><?= $l["skills_on_else"] ?>: <b>ASP.NET 8+ (API, MVC, Razor)</b></li>
                         </ul>
                     </div>
                     <div class="infoblock">
